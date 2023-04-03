@@ -1,5 +1,6 @@
 import time
 import geopy.distance
+import datetime
 from geopy.exc import GeocoderTimedOut
 import haversine as hs
 import pandas as pd
@@ -34,17 +35,31 @@ for index, row in data.iterrows():
 
 for car_id in car_gps_mapping.keys():
     j = 0
-    print(car_id)
     prev_row = ""
     for row in car_gps_mapping[car_id]:
         if j == 0:
             prev_row = row
             j += 1
             continue
+
+        prev_timestamp = datetime.datetime.strptime(prev_row['Timestamp'], '%d/%m/%Y %H:%M:%S')
+        current_timestamp = datetime.datetime.strptime(row['Timestamp'], '%d/%m/%Y %H:%M:%S')
+
         prev_cordinates = (prev_row['lat'], prev_row['long'])
         current_cordinates = (row['lat'], row['long'])
+
         distance = find_distance_between_two_points(prev_cordinates, current_cordinates)
-        print(str(car_id)+" "+str(distance))
+        time_difference = max((current_timestamp - prev_timestamp).total_seconds(), 0.5)
+        
+        speed_kmph = distance / (time_difference / 3600)
+        
+        if time_difference < 30 and speed_kmph > 20:
+            print('Car with ID {} is moving'.format(car_id))
+        elif distance < 0.220:
+            print("Car with ID {} is stationary".format(car_id))
+        else:
+            print("Car with ID {} is missing".format(car_id))
+	
         prev_row = row
         j += 1
-        if j>0:break
+        if j>2:break
