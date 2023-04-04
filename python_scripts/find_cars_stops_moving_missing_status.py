@@ -4,14 +4,10 @@ import datetime
 from geopy.exc import GeocoderTimedOut
 import haversine as hs
 import pandas as pd
-import csv
+import json
+from pathlib import Path
 
 data = pd.read_csv("./MC2/gps.csv", encoding="utf-8")
-# newfile = open('./MC/updated-bfro-report-locations.csv', 'a+', newline='', encoding="utf-8")
-# field_names = ['number','title','classification','timestamp','latitude','longitude','state','country']
-# writer = csv.DictWriter(newfile, fieldnames=field_names)
-# writer.writeheader()
-# updated_data = pd.DataFrame()
 
 def find_distance_between_two_points(point1, point2, attempt=1, max_attempts=6):
     try:
@@ -24,42 +20,87 @@ def find_distance_between_two_points(point1, point2, attempt=1, max_attempts=6):
 
 i = 0
 car_gps_mapping = {}
-car_stops = {}
+car_status_for_each_minute = {} # [id][day][hour][minute][status] = 'moving' OR 'stationary' OR 'missing'
+time_stationaryCars_mapping = {}  # [day][hour][minute][id] = array of dictionaries where each dictionary has info of 'Timestamp', 'id', 'lat', 'long'. Here we will store the infromation of stationary cars for each minute of each day.
 
 for index, row in data.iterrows():
     car_id = row['id']
     if not car_id in car_gps_mapping:
         car_gps_mapping[car_id] = []
     car_gps_mapping[car_id].append(row)
-    if index>500:break
 
 for car_id in car_gps_mapping.keys():
     j = 0
     prev_row = ""
+    car_status_for_each_minute[car_id] = {}
+
     for row in car_gps_mapping[car_id]:
         if j == 0:
             prev_row = row
             j += 1
             continue
 
-        prev_timestamp = datetime.datetime.strptime(prev_row['Timestamp'], '%d/%m/%Y %H:%M:%S')
-        current_timestamp = datetime.datetime.strptime(row['Timestamp'], '%d/%m/%Y %H:%M:%S')
+        current_timestamp = datetime.datetime.strptime(row['Timestamp'], '%m/%d/%Y %H:%M:%S')
+        day = current_timestamp.day
+        hour = current_timestamp.hour
+        minute = current_timestamp.minute
+        if not day in car_status_for_each_minute[car_id]:
+            car_status_for_each_minute[car_id][day] = {}
+        if not hour in car_status_for_each_minute[car_id][day]:
+            car_status_for_each_minute[car_id][day][hour] = {}
+        if not minute in car_status_for_each_minute[car_id][day][hour]:
+            car_status_for_each_minute[car_id][day][hour][minute] = {"moving":0, "stationary":0, "missing":0, "status":""}
+
+        prev_timestamp = datetime.datetime.strptime(prev_row['Timestamp'], '%m/%d/%Y %H:%M:%S')
 
         prev_cordinates = (prev_row['lat'], prev_row['long'])
         current_cordinates = (row['lat'], row['long'])
 
         distance = find_distance_between_two_points(prev_cordinates, current_cordinates)
-        time_difference = max((current_timestamp - prev_timestamp).total_seconds(), 0.5)
-        
+        time_difference = max((current_timestamp - prev_timestamp).total_seconds(), 0.8)
+
         speed_kmph = distance / (time_difference / 3600)
-        
+
+        # decide the status of the car for this gps entry (for this second)
         if time_difference < 30 and speed_kmph > 20:
-            print('Car with ID {} is moving'.format(car_id))
+            value = car_status_for_each_minute[car_id][day][hour][minute]['moving']
+            car_status_for_each_minute[car_id][day][hour][minute]['moving'] = value + 1
         elif distance < 0.220:
-            print("Car with ID {} is stationary".format(car_id))
+            value = car_status_for_each_minute[car_id][day][hour][minute]['stationary']
+            car_status_for_each_minute[car_id][day][hour][minute]['stationary'] = value + 1
+
+            if not day in time_stationaryCars_mapping:
+                time_stationaryCars_mapping[day] = {}
+            if not hour in time_stationaryCars_mapping[day]:
+                time_stationaryCars_mapping[day][hour] = {}
+            if not minute in time_stationaryCars_mapping[day][hour]:
+                time_stationaryCars_mapping[day][hour][minute] = {}
+            if not car_id in time_stationaryCars_mapping[day][hour][minute]:
+                time_stationaryCars_mapping[day][hour][minute][car_id] = []
+
+            time_stationaryCars_mapping[day][hour][minute][car_id].append(row.to_dict())
         else:
-            print("Car with ID {} is missing".format(car_id))
-	
+            value = car_status_for_each_minute[car_id][day][hour][minute]['missing']
+            car_status_for_each_minute[car_id][day][hour][minute]['missing'] = value + 1
+
+        # decide the status of the car for the whole minute
+        if car_status_for_each_minute[car_id][day][hour][minute]['moving'] >= car_status_for_each_minute[car_id][day][hour][minute]['stationary']:
+            if car_status_for_each_minute[car_id][day][hour][minute]['moving'] > car_status_for_each_minute[car_id][day][hour][minute]['missing']:
+                car_status_for_each_minute[car_id][day][hour][minute]['status'] = "moving"
+            else:
+                car_status_for_each_minute[car_id][day][hour][minute]['status'] = "missing"
+        else:
+            if car_status_for_each_minute[car_id][day][hour][minute]['stationary'] > car_status_for_each_minute[car_id][day][hour][minute]['missing']:
+                car_status_for_each_minute[car_id][day][hour][minute]['status'] = "stationary"
+            else:
+                car_status_for_each_minute[car_id][day][hour][minute]['status'] = "missing"
+
         prev_row = row
         j += 1
-        if j>2:break
+
+path_of_project_folder = Path(__file__).parent.parent.resolve().as_posix()
+with open(path_of_project_folder+'/pre_processed_data/car_status_for_each_minute.json', 'w+') as fp1:
+    json.dump(car_status_for_each_minute, fp1)
+
+with open(path_of_project_folder+'/pre_processed_data/time_stationaryCars_mapping.json', 'w+') as fp2:
+    json.dump(time_stationaryCars_mapping, fp2)
