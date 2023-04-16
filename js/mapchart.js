@@ -2,9 +2,9 @@ var abila;
 var kronos;
 var svg;
 var abilaProjection;
-var margin = {top:20, right:20, bottom:40, left:40},
-    width = 1180 - margin.left - margin.right,
-    height = 754 - margin.top - margin.bottom;
+var margin_map = {top:20, right:20, bottom:40, left:40},
+    width_map = 1180 - margin_map.left - margin_map.right,
+    height_map = 754 - margin_map.top - margin_map.bottom;
 
 var gpsData;
 var data = [];
@@ -47,12 +47,12 @@ document.addEventListener('DOMContentLoaded',function(){
             .attr('x',0)
             .attr('y',0)
             .attr('xlink:href','data/MC2-tourist.jpg')
-            .attr('height',height)
-            .attr('width',width)
+            .attr('height',height_map)
+            .attr('width',width_map)
             .attr('class','image')
             .attr('opacity',0.75);
         abilaProjection = d3.geoEquirectangular()
-                            .fitSize([width,height],abila);
+                            .fitSize([width_map,height_map],abila);
         //console.log(usaProjection);
         
         abilaPath = d3.geoPath().projection(abilaProjection);
@@ -71,7 +71,7 @@ function plotUSA(){
         .attr('d',abilaPath)
         .attr('fill','white')
         .attr('stroke','black')
-        .attr('stroke-width','1px')
+        .attr('stroke-width_map','1px')
 }
 
 function plotKronos(){
