@@ -1,22 +1,21 @@
 // This is completed code of 5th plot - box plot
-var margin = {top: 10, right: 30, bottom: 130, left: 70},
-    width = 1060 - margin.left - margin.right,
-    height = 900 - margin.top - margin.bottom;
-    
+var margin_box = {top: 10, right: 30, bottom: 130, left: 70},
+    width_box = 1060 - margin_box.left - margin_box.right,
+    height_box = 900 - margin_box.top - margin_box.bottom;
+
+var data
 document.addEventListener('DOMContentLoaded', function () {
+
 // append the svg object to the body of the page
-var svg = d3.select("#box_plot_div")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+var svg = d3.select("#box_plot_svg")
+    // .attr("width", width + margin.left + margin.right)
+    // .attr("height", height + margin.top + margin.bottom)
+  svg = svg.append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-
+          "translate(" + margin_box.left + "," + margin_box.top + ")");
 // Read the data and compute summary statistics for each specie
-d3.csv("MC2/cc_data_box.csv").then( function(data) {
-    console.log(data);
+d3.csv("MC2/cc_data_box.csv").then( function(values) {
+    data = values
   // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
   var sumstat = d3.rollup(data, function(d) {
     q1 = d3.quantile(d.map(function(g) { return g.price;}).sort(d3.ascending),.25)
@@ -30,7 +29,7 @@ d3.csv("MC2/cc_data_box.csv").then( function(data) {
   console.log(sumstat);
   
   var x = d3.scaleBand()
-    .range([ 0, width ])
+    .range([ 0, width_box ])
     .domain(["Abila Airport",
     "Abila Scrapyard",
     "Abila Zacharo",
@@ -68,7 +67,7 @@ d3.csv("MC2/cc_data_box.csv").then( function(data) {
     .paddingInner(1)
     .paddingOuter(.5)
   svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
+    .attr("transform", "translate(0," + height_box + ")")
     .call(d3.axisBottom(x))
     .selectAll("text")
       .attr("transform", "translate(-10,0)rotate(-45)")
@@ -77,7 +76,7 @@ d3.csv("MC2/cc_data_box.csv").then( function(data) {
   // Show the Y scale
   var y = d3.scaleLog()
     .domain([2,12000])
-    .range([height, 0])
+    .range([height_box, 0])
 
   svg.append("g").call(d3.axisLeft(y))
 
