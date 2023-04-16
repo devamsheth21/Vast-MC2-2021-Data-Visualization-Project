@@ -1,7 +1,7 @@
 // This is completed code of 1st plot - circular bar plot
 
 // Hint: This is a good place to declare your global variables
-
+var data
 const margin = {top: 100, right: 0, bottom: 0, left: 0},
     width = 860 - margin.left - margin.right,
     height = 860 - margin.top - margin.bottom,
@@ -10,17 +10,26 @@ const margin = {top: 100, right: 0, bottom: 0, left: 0},
     // outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 
 document.addEventListener('DOMContentLoaded', function () {
-// append the svg object
-const svg = d3.select("#circular-bar-plot")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+d3.csv("data/popularlocationdata.csv").then( function(values) {
+
+  data = values;
+  drawCircularBarPlot();
+
+});
+});
+
+function drawCircularBarPlot()
+{
+  // append the svg object
+  var svg = d3.select("#circular_bar_svg")
+    // .attr("width", width + margin.left + margin.right)
+    // .attr("height", height + margin.top + margin.bottom)
+  svg = svg.append("g")
     .attr("transform", `translate(${width/2 + margin.left}, ${height/2 + margin.top})`);
 
-d3.csv("popularlocationdata.csv").then( function(data) {
 
-  // X scale: common for 2 data series
+
+    // X scale: common for 2 data series
   const x = d3.scaleBand()
       .range([0, 2 * Math.PI])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
       .align(0)                  // This does nothing
@@ -37,12 +46,12 @@ d3.csv("popularlocationdata.csv").then( function(data) {
       .domain([1, 220]);
 
   // Add the bars
-  svg.append("g")
-    .selectAll("path")
+  svg
+    .selectAll(".cc_bars")
     .data(data)
     .join("path")
       .attr("fill", "#69b3a2")
-      .attr("class", "yo")
+      .attr("class", "cc_bars")
       .attr("d", d3.arc()     // imagine your doing a part of a donut plot
           .innerRadius(innerRadius)
           .outerRadius(d => y(d['cc_count']))
@@ -52,7 +61,7 @@ d3.csv("popularlocationdata.csv").then( function(data) {
           .padRadius(innerRadius))
 
   // Add the labels
-  svg.append("g")
+  svg
       .selectAll("g")
       .data(data)
       .join("g")
@@ -65,10 +74,11 @@ d3.csv("popularlocationdata.csv").then( function(data) {
         .attr("alignment-baseline", "middle")
 
   // Add the second series
-  svg.append("g")
-    .selectAll("path")
+  svg
+    .selectAll("lc_bars")
     .data(data)
     .join("path")
+    .attr("class", "lc_bars")
       .attr("fill", "red")
       .attr("d", d3.arc()     // imagine your doing a part of a donut plot
           .innerRadius( d => ybis(0))
@@ -78,10 +88,6 @@ d3.csv("popularlocationdata.csv").then( function(data) {
           .padAngle(0.01)
           .padRadius(innerRadius))
 
-
-  
-
-});
-});
+}
 
 
