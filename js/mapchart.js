@@ -71,7 +71,7 @@ function plotUSA(){
         .attr('d',abilaPath)
         .attr('fill','white')
         .attr('stroke','black')
-        .attr('stroke-width_map','1px')
+        .attr('stroke-width','1px')
 }
 
 function plotKronos(){
