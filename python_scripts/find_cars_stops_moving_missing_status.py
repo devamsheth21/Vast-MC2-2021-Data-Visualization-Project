@@ -1,8 +1,9 @@
+import csv
 import time
 import geopy.distance
 import datetime
 from geopy.exc import GeocoderTimedOut
-import haversine as hs
+# import haversine as hs
 import pandas as pd
 import json
 from pathlib import Path
@@ -22,6 +23,7 @@ i = 0
 car_gps_mapping = {}
 car_status_for_each_minute = {} # [id][day][hour][minute][status] = 'moving' OR 'stationary' OR 'missing'
 time_stationaryCars_mapping = {}  # [day][hour][minute][id] = array of dictionaries where each dictionary has info of 'Timestamp', 'id', 'lat', 'long'. Here we will store the infromation of stationary cars for each minute of each day.
+stationaryCars_location_time_mapping = []
 
 for index, row in data.iterrows():
     car_id = row['id']
@@ -62,10 +64,10 @@ for car_id in car_gps_mapping.keys():
         speed_kmph = distance / (time_difference / 3600)
 
         # decide the status of the car for this gps entry (for this second)
-        if time_difference < 30 and speed_kmph > 20:
+        if time_difference < 30 and speed_kmph > 20: #moving
             value = car_status_for_each_minute[car_id][day][hour][minute]['moving']
             car_status_for_each_minute[car_id][day][hour][minute]['moving'] = value + 1
-        elif distance < 0.220:
+        elif distance < 0.220: #stationary
             value = car_status_for_each_minute[car_id][day][hour][minute]['stationary']
             car_status_for_each_minute[car_id][day][hour][minute]['stationary'] = value + 1
 
@@ -79,7 +81,8 @@ for car_id in car_gps_mapping.keys():
                 time_stationaryCars_mapping[day][hour][minute][car_id] = []
 
             time_stationaryCars_mapping[day][hour][minute][car_id].append(row.to_dict())
-        else:
+            stationaryCars_location_time_mapping.append({"car_id":car_id, "lat":row['lat'], "long":row['long'], "Timestamp":row['Timestamp']})
+        else: #missing
             value = car_status_for_each_minute[car_id][day][hour][minute]['missing']
             car_status_for_each_minute[car_id][day][hour][minute]['missing'] = value + 1
 
@@ -104,3 +107,8 @@ with open(path_of_project_folder+'/pre_processed_data/car_status_for_each_minute
 
 with open(path_of_project_folder+'/pre_processed_data/time_stationaryCars_mapping.json', 'w+') as fp2:
     json.dump(time_stationaryCars_mapping, fp2)
+
+with open(path_of_project_folder+'/pre_processed_data/stationaryCars_location_time_mapping.csv', 'w+', newline='') as fp3:
+    dict_writer = csv.DictWriter(fp3, stationaryCars_location_time_mapping[0].keys())
+    dict_writer.writeheader()
+    dict_writer.writerows(stationaryCars_location_time_mapping)
