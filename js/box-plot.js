@@ -1,10 +1,7 @@
 // This is completed code of 5th plot - box plot
-
-
-
 var margin = {top: 10, right: 30, bottom: 130, left: 70},
     width = 1060 - margin.left - margin.right,
-    height = 1200 - margin.top - margin.bottom;
+    height = 900 - margin.top - margin.bottom;
     
 document.addEventListener('DOMContentLoaded', function () {
 // append the svg object to the body of the page
@@ -18,7 +15,7 @@ var svg = d3.select("#box_plot_div")
 
 
 // Read the data and compute summary statistics for each specie
-d3.csv("MC2/cc_data.csv").then( function(data) {
+d3.csv("MC2/cc_data_box.csv").then( function(data) {
     console.log(data);
   // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
   var sumstat = d3.rollup(data, function(d) {
@@ -26,26 +23,48 @@ d3.csv("MC2/cc_data.csv").then( function(data) {
     median = d3.quantile(d.map(function(g) { return g.price;}).sort(d3.ascending),.5)
     q3 = d3.quantile(d.map(function(g) { return g.price;}).sort(d3.ascending),.75)
     interQuantileRange = q3 - q1
-    min = q1 - 1.5 * interQuantileRange
-    max = q3 + 1.5 * interQuantileRange
+    min = d3.quantile(d.map(function(g) { return g.price;}).sort(d3.ascending),0)
+    max = d3.quantile(d.map(function(g) { return g.price;}).sort(d3.ascending),1)
     return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max})
   }, function(d) { return d.location;});
   console.log(sumstat);
   
   var x = d3.scaleBand()
     .range([ 0, width ])
-    .domain(["Brew've Been Served", 'Hallowed Grounds', 'Coffee Cameleon',
-    'Abila Airport', 'Kronos Pipe and Irrigation',
-    'Nationwide Refinery', 'Maximum Iron and Steel',
-    'Stewart and Sons Fabrication', 'Carlyle Chemical Inc.',
-    'Coffee Shack', 'Bean There Done That', 'Brewed Awakenings',
-    "Jack's Magical Beans", "Katerina's Café", 'Hippokampos',
-    'Abila Zacharo', 'Gelatogalore', 'Kalami Kafenion', 'Ouzeri Elian',
-    "Guy's Gyros", 'U-Pump', "Frydos Autosupply n' More",
-    "Albert's Fine Clothing", "Shoppers' Delight", 'Abila Scrapyard',
-    "Frank's Fuel", 'Chostus Hotel', 'General Grocer', 'Kronos Mart',
-    "Octavio's Office Supplies", 'Roberts and Sons', 'Ahaggo Museum',
-    'Desafio Golf Course', 'Daily Dealz'])
+    .domain(["Abila Airport",
+    "Abila Scrapyard",
+    "Abila Zacharo",
+    "Ahaggo Museum",
+    "Albert's Fine Clothing",
+    "Bean There Done That",
+    "Brew've Been Served",
+    "Brewed Awakenings",
+    "Carlyle Chemical Inc.",
+    "Chostus Hotel",
+    "Coffee Cameleon",
+    "Coffee Shack",
+    "Daily Dealz",
+    "Desafio Golf Course",
+    "Frank's Fuel",
+    "Frydos Autosupply n' More",
+    "Gelatogalore",
+    "General Grocer",
+    "Guy's Gyros",
+    "Hallowed Grounds",
+    "Hippokampos",
+    "Jack's Magical Beans",
+    "Kalami Kafenion",
+    "Katerina's Cafe",
+    "Kronos Mart",
+    "Kronos Pipe and Irrigation",
+    "Maximum Iron and Steel",
+    "Nationwide Refinery",
+    "Octavio's Office Supplies",
+    "Ouzeri Elian",
+    "Roberts and Sons",
+    "Shoppers' Delight",
+    "Stewart and Sons Fabrication",
+    "U-Pump"])
     .paddingInner(1)
     .paddingOuter(.5)
   svg.append("g")
@@ -56,9 +75,10 @@ d3.csv("MC2/cc_data.csv").then( function(data) {
       .style("text-anchor", "end");
 
   // Show the Y scale
-  var y = d3.scaleLinear()
-    .domain([0,10000])
+  var y = d3.scaleLog()
+    .domain([2,12000])
     .range([height, 0])
+
   svg.append("g").call(d3.axisLeft(y))
 
   // Show the main vertical line
@@ -69,7 +89,7 @@ d3.csv("MC2/cc_data.csv").then( function(data) {
     .append("line")
       .attr("x1", function(d){return(x(d[0]))})
       .attr("x2", function(d){return(x(d[0]))})
-      .attr("y1", function(d){return(y(d[1].min))})
+      .attr("y1", function(d){console.log(d[1]);return(y(d[1].min))})
       .attr("y2", function(d){return(y(d[1].max))})
       .attr("stroke", "black")
       .style("width", 40)
