@@ -6,14 +6,14 @@
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/circular-bar-plot.js"></script>
+        <script src="js/mapchart.js"></script>
+        <link rel="shortcut icon" href="#">
         <style>
             .myContainer {
                 margin:auto;
-                width:auto;
+                width:1600px;
             }
-            div{
-                height: 400px;
-            }
+            
             #circular_bar_svg {
                 width: 50%;
                 height:1000px;
@@ -60,6 +60,33 @@
                 border: 1px solid lightgray;
                 border-radius: 3px;
             }
+            /* #map_div {
+                width: 350px;
+                height: 800px;
+                overflow-y: scroll;
+            } */
+            /* #map_svg {
+                width: 1200px;
+                height:800px;
+                background-color: white;
+                border: 1px solid lightgray;
+                border-radius: 3px;
+                display: block;
+            } */
+            #map_cars {
+                width: 350px;
+                height:1050px;
+                background-color: white;
+                border: 1px solid lightgray;
+                border-radius: 3px;
+                display: block;
+            }
+            #map_div {
+                width: 350px;
+                height: 800px;
+                overflow-y: scroll;
+            }
+            
         </style>
     </head>
     <body>
@@ -67,21 +94,20 @@
             <h1 class="text-center">Project - CSE 578 - Spring 2023</h1>
             <hr>
            
-<<<<<<< HEAD
             <div id="question_1_div" class="border border-dark rounded bg-light shadow-sm">
                     <svg id="circular_bar_svg"></svg>
                     <svg id="ring_svg"></svg>
-=======
-            <div id="circular_bar_div" class="border border-dark rounded bg-light shadow-sm">
-
->>>>>>> b35e094e20f023b68960a450af5864ba46bcb9cf
             </div>
             <div id="question_2_div" class="border border-dark rounded bg-light shadow-sm">
                 <svg id="shankey_svg"></svg>
                 <svg id="box_plot_svg"></svg>
             </div>
             <div id="question_3_div" class="border border-dark rounded bg-light shadow-sm">
-                <svg id="map_svg"></svg>
+                    <svg id="map_svg"></svg>
+                    <div id="map_div">
+                        <svg id="map_cars"></svg>
+                    </div>
+                    <button type="button" id="play" onclick="timelapse()">Play</button>
                 
         </div>
         <div id="question_4_div" class="border border-dark rounded bg-light shadow-sm">
