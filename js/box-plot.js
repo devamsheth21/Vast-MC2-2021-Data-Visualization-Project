@@ -26,7 +26,7 @@ d3.csv("MC2/cc_data_box.csv").then( function(values) {
     max = d3.quantile(d.map(function(g) { return g.price;}).sort(d3.ascending),1)
     return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max})
   }, function(d) { return d.location;});
-  console.log(sumstat);
+  //console.log(sumstat);
   
   var x = d3.scaleBand()
     .range([ 0, width_box ])
@@ -88,7 +88,8 @@ d3.csv("MC2/cc_data_box.csv").then( function(values) {
     .append("line")
       .attr("x1", function(d){return(x(d[0]))})
       .attr("x2", function(d){return(x(d[0]))})
-      .attr("y1", function(d){console.log(d[1]);return(y(d[1].min))})
+      .attr("y1", function(d){//console.log(d[1]);
+	  return(y(d[1].min))})
       .attr("y2", function(d){return(y(d[1].max))})
       .attr("stroke", "black")
       .style("width", 40)

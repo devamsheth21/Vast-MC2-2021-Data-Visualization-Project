@@ -1,19 +1,39 @@
 <!DOCTYPE html>
+<meta charset="utf-8">
 <html lang='en'>
 
 <head>
     <title>Project- CSE 578 - Spring 2023</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/circular-bar-plot.js"></script>
     <script src="js/mapchart.js"></script>
     <link rel="shortcut icon" href="#">
     <script src="js/box-plot.js"></script>
+    <script src="js/sanky.js"></script>
     <style>
-        .myConta iner {
+        .myContainer {
             margin: auto;
             width: 1600px;
+        }
+        .link {
+			  fill: none;
+			  
+			}
+
+        .link:hover {
+            stroke-opacity: .5;
+        }
+        .node rect {
+            fill-opacity: .9;
+            shape-rendering: crispEdges;
+        }
+
+        .node text {
+            pointer-events: none;
+            text-shadow: 0 1px 0 #fff;
         }
 
         #circular_bar_svg {
@@ -35,8 +55,6 @@
         }
 
         #shankey_svg {
-            width: 45%;
-            height: 1000px;
             background-color: white;
             border: 1px solid lightgray;
             border-radius: 3px;
