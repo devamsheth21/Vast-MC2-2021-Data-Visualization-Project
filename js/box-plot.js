@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .style("width", 40)
 
     // rectangle for the main box
-    var boxWidth = 30
+    var boxWidth = 22
     svg
       .selectAll("boxes")
       .data(sumstat)
