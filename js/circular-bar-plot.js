@@ -45,6 +45,21 @@ function drawCircularBarPlot()
       .range([innerRadius, 3])   // Domain will be defined later.
       .domain([1, 220]);
 
+  // Tooltip
+  var tooltip = d3.select("#question_1_div")
+                  .append("div")
+                  .style("opacity", 0)
+                  .attr("class", "tooltip")
+                  .style("background-color", "white")
+                  .style("color", "black")
+                  .style("border", "solid")
+                  .style("border-width", "2px")
+                  .style("border-radius", "5px")
+                  .style("padding", "5px")
+                  .style("position", "absolute");
+
+
+
   // Add the bars
   svg
     .selectAll(".cc_bars")
@@ -59,6 +74,20 @@ function drawCircularBarPlot()
           .endAngle(d => x(d.location) + x.bandwidth())
           .padAngle(0.01)
           .padRadius(innerRadius))
+      .on("mouseover", function (_, d) {
+            tooltip.style("opacity", 1);
+            d3.select(this).style("opacity", 1);
+        })
+      .on("mouseout", function (_, d) {
+          tooltip.html("").style("opacity", 0);
+          d3.select(this).style("opacity", 1);
+      })
+      .on("mousemove", function (event, d) {
+          d3.select(this).style("opacity", 0.7);
+          tooltip.html('Total Transactions: ' + d['cc_count'] + '<br>' + 'Location: ' + d.location)
+              .style("left", event.clientX + window.scrollX + 20 + "px")
+              .style("top", event.clientY + window.scrollY - 20 + "px");
+      });
 
   // Add the labels
   svg
@@ -75,7 +104,7 @@ function drawCircularBarPlot()
 
   // Add the second series
   svg
-    .selectAll("lc_bars")
+    .selectAll(".lc_bars")
     .data(data)
     .join("path")
     .attr("class", "lc_bars")
@@ -87,6 +116,20 @@ function drawCircularBarPlot()
           .endAngle(d => x(d.location) + x.bandwidth())
           .padAngle(0.01)
           .padRadius(innerRadius))
+          .on("mouseover", function (_, d) {
+            tooltip.style("opacity", 1);
+            d3.select(this).style("opacity", 1);
+        })
+      .on("mouseout", function (_, d) {
+          tooltip.html("").style("opacity", 0);
+          d3.select(this).style("opacity", 1);
+      })
+      .on("mousemove", function (event, d) {
+          d3.select(this).style("opacity", 0.7);
+          tooltip.html('Total Transactions: ' + d['loyalty_count'] + '<br>' + 'Location: ' + d.location)
+              .style("left", event.clientX + window.scrollX + 20 + "px")
+              .style("top", event.clientY + window.scrollY - 20 + "px");
+      });
 
 }
 
