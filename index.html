@@ -10,6 +10,7 @@
     <script src="js/main.js"></script>
     <script src="js/circular-bar-plot.js"></script>
     <script src="js/mapchart.js"></script>
+    <script src="js/innovringchart.js"></script>
     <link rel="shortcut icon" href="#">
     <script src="js/box-plot.js"></script>
     <script src="js/sanky.js"></script>
@@ -23,7 +24,20 @@
 
         <div id="question_1_div" class="border border-dark rounded bg-light shadow-sm">
             <svg id="circular_bar_svg"></svg>
-            <svg id="ring_svg"></svg>
+            <div class="ringcontainer">
+            <div id="panel" class="border border-dark rounded bg-light shadow-sm">
+            <label for="global-indicator-select">Interact:</label>
+            <select onchange="UpdateChart()" id="dropdownloc">
+                <option value=1> All</option>
+            </select>
+            <select onchange="UpdateChart()" id="dropdowncc">
+                <option value=1> All</option>
+            </select>
+             </div>
+                <div id="ringvisualization" >
+                    <svg id="ring_svg"></svg>
+                </div>
+            </div> 
         </div>
         <div id="question_2_div" class="border border-dark rounded bg-light shadow-sm">
             <svg id="shankey_svg"></svg>
