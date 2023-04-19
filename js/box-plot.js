@@ -162,6 +162,8 @@ document.addEventListener('DOMContentLoaded', function () {
       .data(data)
       .enter()
       .append("circle")
+      .attr("id", d => "box_"+ location_index[d.location])
+      .attr("class", "box_circles")
       .attr("cx", function (d) { return (x(d.location) - jitterWidth / 2 + Math.random() * jitterWidth) })
       .attr("cy", function (d) { return (y(d.price)) })
       .attr("r", 3)
