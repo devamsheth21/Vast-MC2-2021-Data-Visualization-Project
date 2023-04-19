@@ -27,7 +27,8 @@ function drawCircularBarPlot() {
     .attr("transform", `translate(${width / 2 + margin.left}, ${height / 2 + margin.top})`);
 
 
-
+  var opacity = 0.6
+  var clicked = null
   // X scale: common for 2 data series
   const x = d3.scaleBand()
     .range([0, 2 * Math.PI])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
@@ -66,6 +67,8 @@ function drawCircularBarPlot() {
     .join("path")
     .attr("fill", "#69b3a2")
     .attr("class", "cc_bars")
+    .attr("id", d => "bar_"+location_index[d.location])
+    .style("opacity",opacity)
     .attr("d", d3.arc()     // imagine your doing a part of a donut plot
       .innerRadius(innerRadius)
       .outerRadius(d => y(d['cc_count']))
@@ -79,14 +82,34 @@ function drawCircularBarPlot() {
     })
     .on("mouseout", function (_, d) {
       tooltip.html("").style("opacity", 0);
-      d3.select(this).style("opacity", 1);
+      d3.select(this).style("opacity", opacity);
+      if(clicked != null){
+        d3.select('#bar_'+clicked).style("opacity",1);
+      }
     })
     .on("mousemove", function (event, d) {
-      d3.select(this).style("opacity", 0.7);
+      d3.select(this).style("opacity", 1);
       tooltip.html('Total Transactions: ' + d['cc_count'] + '<br>' + 'Location: ' + d.location)
         .style("left", event.clientX + window.scrollX + 20 + "px")
         .style("top", event.clientY + window.scrollY - 20 + "px");
-    });
+    })
+    .on("click", function(event,d){
+      if(clicked == null)
+      {
+      d3.selectAll('.cc_bars').style("opacity",0.1);
+      d3.select(this).style("opacity",1);
+      d3.selectAll(".box_circles").style("opacity",0.1);
+      d3.selectAll('#box_'+location_index[d.location]).style("opacity",1);
+      opacity = 0.1;
+      clicked = location_index[d.location];
+      }
+      else
+      {
+        clicked = null;
+        opacity = 0.6
+        d3.selectAll('.cc_bars').style("opacity", opacity);
+      }
+    })
 
   // Add the labels
   svg
@@ -108,6 +131,8 @@ function drawCircularBarPlot() {
     .join("path")
     .attr("class", "lc_bars")
     .attr("fill", "red")
+    .attr("id", d => "bar_"+location_index[d.location])
+    .style("opacity",opacity)
     .attr("d", d3.arc()     // imagine your doing a part of a donut plot
       .innerRadius(d => ybis(0))
       .outerRadius(d => ybis(d['loyalty_count']))
@@ -128,6 +153,23 @@ function drawCircularBarPlot() {
       tooltip.html('Total Transactions: ' + d['loyalty_count'] + '<br>' + 'Location: ' + d.location)
         .style("left", event.clientX + window.scrollX + 20 + "px")
         .style("top", event.clientY + window.scrollY - 20 + "px");
+    })
+    .on("click", function(event,d){
+      if(clicked == null)
+      {
+      d3.selectAll('.lc_bars').style("opacity",0.1);
+      d3.select(this).style("opacity",1);
+      d3.selectAll(".box_circles").style("opacity",0.1);
+      d3.selectAll('#box_'+location_index[d.location]).style("opacity",1);
+      opacity = 0.1;
+      clicked = location_index[d.location];
+      }
+      else
+      {
+        clicked = null;
+        opacity = 0.6
+        d3.selectAll('.lc_bars').style("opacity", opacity);
+      }
     });
 
 }
