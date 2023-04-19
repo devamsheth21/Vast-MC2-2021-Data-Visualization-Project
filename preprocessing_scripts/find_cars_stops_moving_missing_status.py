@@ -34,6 +34,8 @@ time_stationaryCars_mapping = {}  # [day][hour][minute][id] = array of dictionar
 stationaryCars_location_time_mapping = []
 missingCars_location_time_mapping = []
 minutesGap = 0.5
+speed_threshold = 10
+distance_threshold = 0.220
 
 def run():
     i = 0
@@ -87,11 +89,11 @@ def add_data(row, current_timestamp, car_id, time_difference, distance):
     speed_kmph = distance / (time_difference / 3600)
     # print('speed={},  distance={},  time={}'.format(speed_kmph, distance, time_difference))
     # decide the status of the car for this gps entry (for this second)
-    if speed_kmph > 10: #moving
+    if speed_kmph > speed_threshold: #moving
         value = car_status_for_each_minute[car_id][day][hour][minute]['moving']
         car_status_for_each_minute[car_id][day][hour][minute]['moving'] = value + 1
         # print("moving")
-    elif distance < 0.120: #stationary
+    elif distance < distance_threshold: #stationary
         value = car_status_for_each_minute[car_id][day][hour][minute]['stationary']
         car_status_for_each_minute[car_id][day][hour][minute]['stationary'] = value + 1
 
