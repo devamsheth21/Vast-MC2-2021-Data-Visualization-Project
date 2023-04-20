@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			.text(function(d) {
 					return d.source.name + " → " + 
 					d.target.name + "\n" + format(d.value); });
+	  
 
 	// add in the nodes
 	  var node = svg.append("g").selectAll(".node")
@@ -98,7 +99,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		link.style("stroke", function(d) { 
 			return d3.rgb(d.source.color).brighter(1); });
 
-
+		link.on("mouseover", function(d){
+			// Set the opacity of all links to a lower value
+			link.style("opacity", 0.1);
+			// Set the opacity of the hovered link to 1 to make it stand out
+			d3.select(this).style("opacity", 1);
+		})
+		.on("mouseleave", function(d) {
+			// Set the opacity of all links back to the normal value (e.g., 1)
+			link.style("opacity", 1);
+		});
 	// add in the title for the nodes
 	  node.append("text")
 		  .attr("x", function(d) { return d.x0 - 6; })
