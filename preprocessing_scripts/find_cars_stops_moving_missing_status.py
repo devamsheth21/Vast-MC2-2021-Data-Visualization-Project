@@ -8,6 +8,15 @@ import pandas as pd
 import json
 from pathlib import Path
 
+minutesGap = 1
+speed_threshold = 20
+distance_threshold = 0.220
+car_gps_mapping = {}
+car_status_for_each_minute = {} # [id][day][hour][minute][status] = 'moving' OR 'stationary' OR 'missing'
+time_stationaryCars_mapping = {}  # [day][hour][minute][id] = array of dictionaries where each dictionary has info of 'Timestamp', 'id', 'lat', 'long'. Here we will store the infromation of stationary cars for each minute of each day.
+stationaryCars_location_time_mapping = []
+missingCars_location_time_mapping = []
+
 data = pd.read_csv("./MC2/gps.csv", encoding="utf-8")
 with open('./preprocessing_scripts/location_coordinate.json', 'r', encoding="utf-8") as file:
     json_data = file.read()
@@ -33,15 +42,6 @@ def findLocationFromLatLong(lat, long):
         if lat <= cordinate['range'][0][1] and long >= cordinate['range'][0][0] and lat >= cordinate['range'][1][1] and long <= cordinate['range'][1][0]:
             return cordinate['name']
     return "None"
-
-car_gps_mapping = {}
-car_status_for_each_minute = {} # [id][day][hour][minute][status] = 'moving' OR 'stationary' OR 'missing'
-time_stationaryCars_mapping = {}  # [day][hour][minute][id] = array of dictionaries where each dictionary has info of 'Timestamp', 'id', 'lat', 'long'. Here we will store the infromation of stationary cars for each minute of each day.
-stationaryCars_location_time_mapping = []
-missingCars_location_time_mapping = []
-minutesGap = 1
-speed_threshold = 20
-distance_threshold = 0.220
 
 def run():
     i = 0

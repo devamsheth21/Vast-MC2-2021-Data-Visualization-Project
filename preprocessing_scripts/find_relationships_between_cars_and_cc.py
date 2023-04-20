@@ -5,11 +5,11 @@ import pandas as pd
 import json
 from pathlib import Path
 
-cc_car_mapping = {}
 bufferMinutes = 5
 speed_threshold = 20
 distance_threshold = 0.220
 minutesGap = 1
+cc_car_mapping = {}
 
 cc_data = pd.read_csv("./MC2/cc_data.csv", encoding='utf-8')
 with open('./pre_processed_data/time_stationaryCars_mapping_speed={}_distance={}_minutesGap={}.json'.format(speed_threshold, distance_threshold, minutesGap), 'r', encoding="utf-8") as file:
