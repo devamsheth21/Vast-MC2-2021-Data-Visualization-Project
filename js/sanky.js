@@ -1,3 +1,24 @@
+function selectLinkByCcNum(cc_num) {
+	// Find the link with the matching source cc_num
+	if (cc_num == '1'){
+		var link_cc = d3.selectAll(".link");
+		link_cc.style("opacity", 1);
+	}
+	else{
+	var link_cc = d3.selectAll(".link")
+		.filter(function(d) {
+		return d.source.name === cc_num;
+		});
+	
+	// Set the opacity of all links to a lower value
+	d3.selectAll(".link")
+		.style("opacity", 0.1);
+	
+	// Set the opacity of the selected link to 1 to make it stand out
+	link_cc.style("opacity", 1);
+	}
+	}
+
 document.addEventListener('DOMContentLoaded', function () {
 	var margin = {top: 10, right: 10, bottom: 10, left: 10},
     width = 799 - margin.left - margin.right,
@@ -119,6 +140,5 @@ document.addEventListener('DOMContentLoaded', function () {
 		.filter(function(d) { return d.x0 < width / 2; })
 		  .attr("x", function(d) { return d.x1 + 6; })
 		  .attr("text-anchor", "start");
-
 });
 });
