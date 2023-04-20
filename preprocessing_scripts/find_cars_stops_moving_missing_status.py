@@ -24,6 +24,12 @@ def find_distance_between_two_points(point1, point2, attempt=1, max_attempts=6):
 
 def findLocationFromLatLong(lat, long):
     for cordinate in building_coordinate:
+        # cordinate['range'][0] is top left point
+        # cordinate['range'][1] is bottom right point
+        # cordinate['range'][x][1] is lat
+        # cordinate['range'][x][0] is long
+        # lat value decreases as you go down (just like Y-axis)
+        # long value increases as you go right (just like X-axis)
         if lat <= cordinate['range'][0][1] and long >= cordinate['range'][0][0] and lat >= cordinate['range'][1][1] and long <= cordinate['range'][1][0]:
             return cordinate['name']
     return "None"
@@ -33,8 +39,8 @@ car_status_for_each_minute = {} # [id][day][hour][minute][status] = 'moving' OR 
 time_stationaryCars_mapping = {}  # [day][hour][minute][id] = array of dictionaries where each dictionary has info of 'Timestamp', 'id', 'lat', 'long'. Here we will store the infromation of stationary cars for each minute of each day.
 stationaryCars_location_time_mapping = []
 missingCars_location_time_mapping = []
-minutesGap = 0.5
-speed_threshold = 10
+minutesGap = 1
+speed_threshold = 20
 distance_threshold = 0.220
 
 def run():
@@ -86,7 +92,8 @@ def add_data(row, current_timestamp, car_id, time_difference, distance):
     if not minute in car_status_for_each_minute[car_id][day][hour]:
         car_status_for_each_minute[car_id][day][hour][minute] = {"moving":0, "stationary":0, "missing":0, "status":""}
 
-    speed_kmph = distance / (time_difference / 3600)
+    time_difference_hours = (time_difference / 3600)
+    speed_kmph = distance / time_difference_hours
     # print('speed={},  distance={},  time={}'.format(speed_kmph, distance, time_difference))
     # decide the status of the car for this gps entry (for this second)
     if speed_kmph > speed_threshold: #moving
@@ -214,18 +221,18 @@ def old_run():
 
 def write_data_into_files():
     path_of_project_folder = Path(__file__).parent.parent.resolve().as_posix()
-    with open(path_of_project_folder+'/pre_processed_data/car_status_for_each_minute.json', 'w+') as fp1:
+    with open(path_of_project_folder+'/pre_processed_data/car_status_for_each_minute_speed={}_distance={}_minutesGap={}.json'.format(speed_threshold, distance_threshold, minutesGap), 'w+') as fp1:
         json.dump(car_status_for_each_minute, fp1)
 
-    with open(path_of_project_folder+'/pre_processed_data/time_stationaryCars_mapping.json', 'w+') as fp2:
+    with open(path_of_project_folder+'/pre_processed_data/time_stationaryCars_mapping_speed={}_distance={}_minutesGap={}.json'.format(speed_threshold, distance_threshold, minutesGap), 'w+') as fp2:
         json.dump(time_stationaryCars_mapping, fp2)
 
-    with open(path_of_project_folder+'/pre_processed_data/stationaryCars_location_time_mapping.csv', 'w+', newline='') as fp3:
+    with open(path_of_project_folder+'/pre_processed_data/stationaryCars_location_time_mapping_speed={}_distance={}_minutesGap={}.csv'.format(speed_threshold, distance_threshold, minutesGap), 'w+', newline='') as fp3:
         dict_writer = csv.DictWriter(fp3, stationaryCars_location_time_mapping[0].keys())
         dict_writer.writeheader()
         dict_writer.writerows(stationaryCars_location_time_mapping)
 
-    with open(path_of_project_folder+'/pre_processed_data/missingCars_location_time_mapping.csv', 'w+', newline='') as fp4:
+    with open(path_of_project_folder+'/pre_processed_data/missingCars_location_time_mapping_speed={}_distance={}_minutesGap={}.csv'.format(speed_threshold, distance_threshold, minutesGap), 'w+', newline='') as fp4:
         dict_writer = csv.DictWriter(fp4, missingCars_location_time_mapping[0].keys())
         dict_writer.writeheader()
         dict_writer.writerows(missingCars_location_time_mapping)
