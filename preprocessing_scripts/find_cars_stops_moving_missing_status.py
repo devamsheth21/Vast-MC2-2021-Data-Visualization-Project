@@ -8,7 +8,7 @@ import pandas as pd
 import json
 from pathlib import Path
 
-minutesGap = 1
+minutesGap = 0.5
 speed_threshold = 20
 distance_threshold = 0.220
 car_gps_mapping = {}

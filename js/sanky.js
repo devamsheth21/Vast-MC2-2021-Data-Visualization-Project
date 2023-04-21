@@ -1,3 +1,5 @@
+links_original_opacity = 0.7;
+
 function selectLinkByCcNum(cc_num) {
 	// Find the link with the matching source cc_num
 	if (cc_num == '1'){
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	var path = sankey.links();
 
 	// load the data
-	d3.csv("/js/frequency_data.csv").then(function(data) {
+	d3.csv("./pre_processed_data/sankey_chart_data(car_cc_loyalty_frequency).csv").then(function(data) {
 
 	  //set up graph in same style as original example but empty
 	  sankeydata = {"nodes" : [], "links" : []};
@@ -87,7 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		  .enter().append("path")
 		  .attr("class", "link")
 		  .attr("d", d3.sankeyLinkHorizontal())
-		  .attr("stroke-width", function(d) { return d.width; });  
+		  .attr("stroke-width", function(d) { return d.width; })
+		  .style("opacity", links_original_opacity);  
 
 	// add the link titles
 	  link.append("title")
@@ -128,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		})
 		.on("mouseleave", function(d) {
 			// Set the opacity of all links back to the normal value (e.g., 1)
-			link.style("opacity", 1);
+			link.style("opacity", links_original_opacity);
 		});
 	// add in the title for the nodes
 	  node.append("text")
