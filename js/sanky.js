@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	var sankey = d3.sankey()
 		.nodeWidth(20)
 		.nodePadding(8)
-		.size([width, height]);
+		.size([width, height])
+		.nodeAlign(d3.sankeyRight);
 
 	var path = sankey.links();
 
