@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    d3.json('data/new_network.json')
+    d3.json('MC2/network-plot.json')
          .then(function (values) {
             // console.log(data);
             drawNetworkPlot(values);
@@ -8,12 +8,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function drawNetworkPlot(netData)
 {
-    var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    var margin = {top: 50, right: 30, bottom: 100, left: 100},
     width = 1200 - margin.left - margin.right,
     height = 1000 - margin.top - margin.bottom;
     var svg = d3.select('#network_svg');
     svg = svg.append('g').attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
+    var type = ['Security','Information Technology','Facilities','Executive','Engineering']
+
+    var image_ref = {0:"data/circle-15.svg",
+  1:"data/square-15.svg",
+  2:"data/triangle.svg",
+  3:"data/Star.svg",
+  4:"data/hexagon.svg",
+  5:"data/penta.svg"}
+    var color = d3.scaleOrdinal().domain(type).range(d3.schemeSet2);
     // Initialize the links
     var link = svg
     .selectAll("line")
@@ -28,18 +37,25 @@ function drawNetworkPlot(netData)
     .selectAll("circle")
     .data(netData.nodes)
     .enter()
-    .append("circle")
-      .attr("r", 20)
+    .append('image')
+    .attr("xlink:href", d => image_ref[d.group])
+    .attr("width",25)
+    .attr("height", 25)
+      // .attr("r", 20)
     .attr("id", d => "a"+d.id)
-      .style("fill", "#69b3a2")
+      .style("fill", d => {
+        if(d.group==0)
+        return "yellow";
+        else
+        return color(d.employmentType)
+      })
       .on("mouseover", function(d,i){
-        d3.select(this).attr("r",25);
         var id = d.target.id;
+        console.log(i);
         netData.links.map( x => {
 
             if("a"+x.source.id === id)
             {
-                console.log(id);
                 d3.select("#a"+x.target.id).attr("r",25)
                 d3.select("#l"+x.source.id+"_"+x.target.id).style("stroke","blue").style("stroke-width","3px")
             }
@@ -51,13 +67,12 @@ function drawNetworkPlot(netData)
         })
       })
       .on("mouseout", function(d,i){
-        d3.select(this).attr("r",20);
+        
         var id = d.target.id;
         netData.links.map( x => {
 
             if("a"+x.source.id === id)
             {
-                console.log(id);
                 d3.select("#a"+x.target.id).attr("r",20)
                 d3.select("#l"+x.source.id+"_"+x.target.id).style("stroke","#aaa").style("stroke-width","1px")
             }
@@ -89,14 +104,10 @@ function drawNetworkPlot(netData)
         .attr("y2", function(d) { return d.target.y; });
 
     node
-         .attr("cx", function (d) { return d.x+6; })
-         .attr("cy", function(d) { return d.y-6; });
+         .attr("x", function (d) { return d.x-12; })
+         .attr("y", function(d) { return d.y-12; });
     
-  } 
-
-  netData.locationNodes.map(x => d3.select("#a"+x.id).style("fill","red"));
-
-
+  }
 }
 
 
