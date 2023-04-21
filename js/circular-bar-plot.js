@@ -7,6 +7,9 @@ const margin = { top: 100, right: 0, bottom: 0, left: 0 },
   height = 860 - margin.top - margin.bottom,
   innerRadius = 150,
   outerRadius = Math.min(width, height) / 2 - 70;
+
+const cc_color = "#1f77b4";
+const loyal_color = "#ff7f0e";
 // outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -26,7 +29,34 @@ function drawCircularBarPlot() {
   svg = svg.append("g")
     .attr("transform", `translate(${width / 2 + margin.left}, ${height / 2 + margin.top})`);
 
+  const lable_sq_size = 20;
 
+  svg.append("rect")
+    .attr("x", -width/2 + 30)
+    .attr("y", -(height/2) -50)
+    .attr("width", lable_sq_size)
+    .attr("height", lable_sq_size)
+    .attr("fill", cc_color)
+
+ svg.append("rect")
+    .attr("x", -width/2 + 30)
+    .attr("y", -(height/2) -20)
+    .attr("width", lable_sq_size)
+    .attr("height", lable_sq_size)
+    .attr("fill", loyal_color)
+
+ svg.append("text")
+    .text("Frequency of Credit Card Transactions")
+    .attr("x", -width/2 + 60)
+    .attr("y", -(height/2) -35)
+    .style("font-size", "15px")
+    .attr("alignment-baseline", "middle");
+
+ svg.append("text")
+    .text("Frequency of Loyalty Card Transactions")
+    .attr("x", -width/2 + 60)
+    .attr("y", -(height/2) -5)
+    .attr("font-width")
 
   // X scale: common for 2 data series
   const x = d3.scaleBand()
@@ -64,7 +94,7 @@ function drawCircularBarPlot() {
     .selectAll(".cc_bars")
     .data(data)
     .join("path")
-    .attr("fill", "#69b3a2")
+    .attr("fill", cc_color)
     .attr("class", "cc_bars")
     .attr("d", d3.arc()     // imagine your doing a part of a donut plot
       .innerRadius(innerRadius)
@@ -107,7 +137,7 @@ function drawCircularBarPlot() {
     .data(data)
     .join("path")
     .attr("class", "lc_bars")
-    .attr("fill", "red")
+    .attr("fill", loyal_color)
     .attr("d", d3.arc()     // imagine your doing a part of a donut plot
       .innerRadius(d => ybis(0))
       .outerRadius(d => ybis(d['loyalty_count']))
