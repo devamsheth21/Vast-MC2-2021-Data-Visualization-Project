@@ -119,6 +119,18 @@ function DrawChart()
     .text(d => d.slice(5).replace("-","/"))
     .attr("opacity",0.4)
     .style("font-size",'9px');
+    
+   
+    ringsvg.selectAll('line')
+      .data(d3.range(2))
+      .join('line')
+      .attr('x1', d => inwidth/2 + Math.cos(d * Math.PI / 2) * maxRadius)
+      .attr('y1', d => inringheight/2 + Math.sin(d * Math.PI / 2) * maxRadius)
+      .attr('x2', d => inwidth/2 + Math.cos(d * Math.PI / 2 + Math.PI) * maxRadius)
+      .attr('y2', d => inringheight/2 + Math.sin(d * Math.PI / 2 + Math.PI) * maxRadius)
+      .attr('stroke', 'black')
+      .style('stroke-dasharray','10,10')
+      .attr('opacity',0.2);
 
     timelabelangles = d3.range(360,0,-45)
     timelabelangles.forEach((x,i) => timelabelangles[i] = timelabelangles[i]*(Math.PI/180))
@@ -146,9 +158,24 @@ function DrawChart()
                     "\nTime: " + d.time + " time\n" +
                     "Date: " + d.date + " date\n" +
                     "\nPrice :" + d.price +
-                    "\n CCnum : " + d.last4ccnum;
-        })
-
+                    "\n CCnum : " + d.last4ccnum;})
+        
+        const arcGen = (innerRadius, outerRadius, startAngle, endAngle) => d3.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius)
+        .startAngle(startAngle)
+        .endAngle(endAngle);
+                    
+                    
+                    
+        ringsvg.selectAll('.arc')
+        .data(d3.range(2))
+        .join('path')
+        .attr('class', 'arc')
+        .attr('d', d => arcGen(minRadius, maxRadius, d*Math.PI, d*Math.PI + Math.PI))
+        .attr('fill', 'red' );
+                    
+   
     
 }
 

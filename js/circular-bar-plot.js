@@ -1,5 +1,5 @@
 // This is completed code of 1st plot - circular bar plot
-
+var clicked = null
 // Hint: This is a good place to declare your global variables
 var data
 const margin = { top: 100, right: 0, bottom: 0, left: 0 },
@@ -21,6 +21,51 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+function interaction(event,d)
+{
+    var seldrop = d3.select("#dropdownloc")
+
+    if(clicked == null)
+    {
+      d3.selectAll('.cc_bars').style('stroke-width',1)
+    d3.select("#"+ event.target.id).style("stroke-width",3);
+    d3.selectAll(".box_circles").style("opacity",0.1);
+
+    d3.selectAll('#box_'+location_index[d.location]).style("opacity",1);
+    // opacity = 0.1;
+    clicked = event.target.id;
+    seldrop.property('value',d.location);
+    seldrop = document.querySelector("#dropdownloc");
+    seldrop.dispatchEvent(new Event('change'));
+    }
+    else
+    {
+      d3.selectAll('.cc_bars').style('stroke-width',1)
+      d3.selectAll(".box_circles").style("opacity",0.1);
+      if(clicked != event.target.id)
+      {
+        d3.select("#"+ clicked).style("stroke-width",1);
+        d3.select("#"+ event.target.id).style("stroke-width",3);
+        d3.selectAll('#box_'+location_index[d.location]).style("opacity",1);
+        // d3.selectAll('.cc_bars').style("opacity", 0.6);
+        clicked = event.target.id;
+        seldrop.property('value',d.location);
+    seldrop = document.querySelector("#dropdownloc");
+    seldrop.dispatchEvent(new Event('change'));
+      }
+      else
+      {
+      d3.selectAll(".box_circles").style("opacity",1);
+      d3.select("#"+ clicked).style("stroke-width",1);
+        clicked=null;
+        seldrop.property('value',1);
+    seldrop = document.querySelector("#dropdownloc");
+    seldrop.dispatchEvent(new Event('change'));
+      }
+      
+    }
+  
+}
 function drawCircularBarPlot() {
   // append the svg object
   var svg = d3.select("#circular_bar_svg")
@@ -97,7 +142,9 @@ function drawCircularBarPlot() {
     .attr("fill", cc_color)
     .attr("class", "cc_bars")
     .attr("id", d => "bar_"+location_index[d.location])
-    .style("opacity",opacity)
+    .style("opacity",0.7)
+    .style('stroke',"black")
+    .style('stroke-width',1)
     .attr("d", d3.arc()     // imagine your doing a part of a donut plot
       .innerRadius(innerRadius)
       .outerRadius(d => y(d['cc_count']))
@@ -111,10 +158,7 @@ function drawCircularBarPlot() {
     })
     .on("mouseout", function (_, d) {
       tooltip.html("").style("opacity", 0);
-      d3.select(this).style("opacity", opacity);
-      if(clicked != null){
-        d3.select('#bar_'+clicked).style("opacity",1);
-      }
+      d3.select(this).style("opacity", 0.7);
     })
     .on("mousemove", function (event, d) {
       d3.select(this).style("opacity", 1);
@@ -122,23 +166,7 @@ function drawCircularBarPlot() {
         .style("left", event.clientX + window.scrollX + 20 + "px")
         .style("top", event.clientY + window.scrollY - 20 + "px");
     })
-    .on("click", function(event,d){
-      if(clicked == null)
-      {
-      d3.selectAll('.cc_bars').style("opacity",0.1);
-      d3.select(this).style("opacity",1);
-      d3.selectAll(".box_circles").style("opacity",0.1);
-      d3.selectAll('#box_'+location_index[d.location]).style("opacity",1);
-      opacity = 0.1;
-      clicked = location_index[d.location];
-      }
-      else
-      {
-        clicked = null;
-        opacity = 0.6
-        d3.selectAll('.cc_bars').style("opacity", opacity);
-      }
-    })
+    .on("click",(event,d) => interaction(event,d) )
 
   // Add the labels
   svg
