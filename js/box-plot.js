@@ -137,21 +137,19 @@ document.addEventListener('DOMContentLoaded', function () {
       .style("position", "absolute");
 
 
-      
-    
     svg.append("text")
       .attr("class", "xlabel")
       .attr("text-anchor", "middle")
       .attr("x", width_box / 2)
-      .attr("y", height_box+110)
+      .attr("y", height_box + 110)
       .text("Locations")
       .style("font-size", "15px");
-  
-    
+
+
     svg.append("text")
       .attr("class", "ylabel")
       .attr("transform", "rotate(-90)")
-      .attr("y", -margin.left -40)
+      .attr("y", -margin.left - 40)
       .attr("x", -(height_box / 2))
       .attr("dy", "0.3em")
       .style("text-anchor", "middle")
