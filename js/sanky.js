@@ -4,7 +4,7 @@ function selectLinkByCcNum(cc_num) {
 	// Find the link with the matching source cc_num
 	if (cc_num == '1'){
 		var link_cc = d3.selectAll(".link");
-		link_cc.style("opacity", 1);
+		link_cc.style("opacity", links_original_opacity);
 	}
 	else{
 	var link_cc = d3.selectAll(".link")
@@ -17,7 +17,7 @@ function selectLinkByCcNum(cc_num) {
 		.style("opacity", 0.1);
 	
 	// Set the opacity of the selected link to 1 to make it stand out
-	link_cc.style("opacity", 1);
+	link_cc.style("opacity", links_original_opacity);
 	}
 	}
 
