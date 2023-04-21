@@ -47,7 +47,6 @@ function interaction(event,d)
         d3.select("#"+ clicked).style("stroke-width",1);
         d3.select("#"+ event.target.id).style("stroke-width",3);
         d3.selectAll('#box_'+location_index[d.location]).style("opacity",1);
-        // d3.selectAll('.cc_bars').style("opacity", 0.6);
         clicked = event.target.id;
         seldrop.property('value',d.location);
     seldrop = document.querySelector("#dropdownloc");
