@@ -51,7 +51,6 @@ function drawNetworkPlot(netData)
       })
       .on("mouseover", function(d,i){
         var id = d.target.id;
-        console.log(i);
         netData.links.map( x => {
 
             if("a"+x.source.id === id)
