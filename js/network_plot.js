@@ -83,12 +83,12 @@ function drawNetworkPlot(netData) {
     .append('image')
     .attr("xlink:href", d => d)
     .attr("x", width - 130)
-    .attr("y", (_, i) => height  -130 + i * 35)
+    .attr("y", (_, i) => height - 130 + i * 35)
     .attr("width", 25)
     .attr("height", 25)
 
   const legendText = ['Location', 'Security', 'Information Technology', 'Facilities', 'Executive', 'Engineering']
-  
+
   svg
     .selectAll("legends")
     .data(legendText)
@@ -96,7 +96,7 @@ function drawNetworkPlot(netData) {
     .append('text')
     .text(d => d)
     .attr("x", width - 80)
-    .attr("y", (_, i) => height  -112 + i * 35)
+    .attr("y", (_, i) => height - 112 + i * 35)
     .attr("width", 25)
     .attr("height", 25)
 
