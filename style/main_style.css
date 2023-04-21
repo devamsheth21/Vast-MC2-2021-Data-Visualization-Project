@@ -45,6 +45,7 @@
 }
 
 #shankey_svg {
+    width: 40%;
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 3px;
@@ -52,7 +53,7 @@
 }
 
 #box_plot_svg {
-    width: 55%;
+    width: 50%;
     height: 1000px;
     background-color: white;
     border: 1px solid lightgray;
