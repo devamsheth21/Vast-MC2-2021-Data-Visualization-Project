@@ -100,7 +100,11 @@
     display: block;
     float: right;
 }
-
+#sanky_div{
+    width: 820px;
+    height: 800px;
+    overflow-y: scroll;
+} 
 #map_div {
     width: 350px;
     height: 800px;

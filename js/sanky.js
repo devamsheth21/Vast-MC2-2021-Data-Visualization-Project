@@ -1,9 +1,30 @@
+links_original_opacity = 0.7;
+
+function selectLinkByCcNum(cc_num) {
+	// Find the link with the matching source cc_num
+	if (cc_num == '1'){
+		var link_cc = d3.selectAll(".link");
+		link_cc.style("opacity", links_original_opacity);
+	}
+	else{
+	var link_cc = d3.selectAll(".link")
+		.filter(function(d) {
+		return d.source.name === cc_num;
+		});
 	
+	// Set the opacity of all links to a lower value
+	d3.selectAll(".link")
+		.style("opacity", 0.1);
 	
+	// Set the opacity of the selected link to 1 to make it stand out
+	link_cc.style("opacity", links_original_opacity);
+	}
+	}
+
 document.addEventListener('DOMContentLoaded', function () {
 	var margin = {top: 10, right: 10, bottom: 10, left: 10},
     width = 799 - margin.left - margin.right,
-    height = 1000 - margin.top - margin.bottom;  
+    height = 5000 - margin.top - margin.bottom;  
 
 	// format variables
 	var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -22,12 +43,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	var sankey = d3.sankey()
 		.nodeWidth(20)
 		.nodePadding(8)
-		.size([width, height]);
+		.size([width, height])
+		.nodeAlign(d3.sankeyRight);
 
 	var path = sankey.links();
 
 	// load the data
-	d3.csv("/js/frequency_data.csv").then(function(data) {
+	d3.csv("./pre_processed_data/sankey_chart_data(car_cc_loyalty_frequency).csv").then(function(data) {
 
 	  //set up graph in same style as original example but empty
 	  sankeydata = {"nodes" : [], "links" : []};
@@ -68,13 +90,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		  .enter().append("path")
 		  .attr("class", "link")
 		  .attr("d", d3.sankeyLinkHorizontal())
-		  .attr("stroke-width", function(d) { return d.width; });  
+		  .attr("stroke-width", function(d) { return d.width; })
+		  .style("opacity", links_original_opacity);  
 
 	// add the link titles
 	  link.append("title")
 			.text(function(d) {
 					return d.source.name + " → " + 
 					d.target.name + "\n" + format(d.value); });
+	  
 
 	// add in the nodes
 	  var node = svg.append("g").selectAll(".node")
@@ -100,7 +124,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		link.style("stroke", function(d) { 
 			return d3.rgb(d.source.color).brighter(1); });
 
-
+		link.on("mouseover", function(d){
+			// Set the opacity of all links to a lower value
+			link.style("opacity", 0.1);
+			// Set the opacity of the hovered link to 1 to make it stand out
+			d3.select(this).style("opacity", 1);
+		})
+		.on("mouseleave", function(d) {
+			// Set the opacity of all links back to the normal value (e.g., 1)
+			link.style("opacity", links_original_opacity);
+		});
 	// add in the title for the nodes
 	  node.append("text")
 		  .attr("x", function(d) { return d.x0 - 6; })
@@ -111,6 +144,5 @@ document.addEventListener('DOMContentLoaded', function () {
 		.filter(function(d) { return d.x0 < width / 2; })
 		  .attr("x", function(d) { return d.x1 + 6; })
 		  .attr("text-anchor", "start");
-
 });
 });

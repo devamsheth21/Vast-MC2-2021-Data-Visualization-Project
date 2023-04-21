@@ -41,7 +41,7 @@ function UpdateData()
     var alloc = (selected_option == '1')
     // console.log(selectedcc)
     // console.log(selected_option)
-
+    selectLinkByCcNum(selectedcc);  
     filtereddata = ringdata.filter(d => (((d.last4ccnum ==selectedcc) || allcc ) && ((d.location == selected_option) || alloc)))
     console.log(filtereddata)
 }
