@@ -162,27 +162,29 @@ document.addEventListener('DOMContentLoaded', function () {
       .data(data)
       .enter()
       .append("circle")
+      .attr("id", d => "box_"+ location_index[d.location])
+      .attr("class", "box_circles")
       .attr("cx", function (d) { return (x(d.location) - jitterWidth / 2 + Math.random() * jitterWidth) })
       .attr("cy", function (d) { return (y(d.price)) })
       .attr("r", 3)
       .style("fill", "white")
       .attr("stroke", "black")
 
-      .on("mouseover", function (_, d) {
-        tooltip.style("opacity", 1);
-        d3.select(this).style("opacity", 1);
-      })
+      // .on("mouseover", function (_, d) {
+      //   tooltip.style("opacity", 1);
+      //   d3.select(this).style("opacity", 1);
+      // })
 
-      .on("mouseout", function (_, d) {
-        tooltip.html("").style("opacity", 0);
-        d3.select(this).style("opacity", 1);
-      })
-      .on("mousemove", function (event, d) {
-        d3.select(this).style("opacity", 0.7);
-        tooltip.html('Price: ' + d.price + '<br>' + 'Location: ' + d.location + '<br>' + 'Time: ' + d.timestamp + '<br>' + 'cc_num: ' + d.last4ccnum)
-          .style("left", event.clientX + window.scrollX + 20 + "px")
-          .style("top", event.clientY + window.scrollY - 20 + "px");
-      });
+      // .on("mouseout", function (_, d) {
+      //   tooltip.html("").style("opacity", 0);
+      //   d3.select(this).style("opacity", 1);
+      // })
+      // .on("mousemove", function (event, d) {
+      //   d3.select(this).style("opacity", 0.7);
+      //   tooltip.html('Price: ' + d.price + '<br>' + 'Location: ' + d.location + '<br>' + 'Time: ' + d.timestamp + '<br>' + 'cc_num: ' + d.last4ccnum)
+      //     .style("left", event.clientX + window.scrollX + 20 + "px")
+      //     .style("top", event.clientY + window.scrollY - 20 + "px");
+      // });
 
 
 
