@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/circular-bar-plot.js"></script>
-    <script src="js/mapchart.js"></script>
+    <script src="js/map.js"></script>
     <script src="js/innovringchart.js"></script>
     <link rel="shortcut icon" href="#">
     <script src="js/box-plot.js"></script>
@@ -46,6 +46,7 @@
             <svg id="box_plot_svg"></svg>
         </div>
         <div id="question_3_div" class="border border-dark rounded bg-light shadow-sm">
+            <input type="date" id="date" min="2014-01-06" max="2014-01-19" value="2014-01-06" onchange="dateOnChange(this)">
             <svg id="map_svg"></svg>
             <div id="map_div">
                 <svg id="map_cars"></svg>

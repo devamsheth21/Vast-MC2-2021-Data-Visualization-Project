@@ -155,19 +155,28 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Set the opacity of the hovered link to 1 to make it stand out
 			d3.select(this).style("opacity", 1);
 		})
-			.on("mouseleave", function (d) {
-				// Set the opacity of all links back to the normal value (e.g., 1)
-				link.style("opacity", links_original_opacity);
-			});
-		// add in the title for the nodes
-		node.append("text")
-			.attr("x", function (d) { return d.x0 - 6; })
-			.attr("y", function (d) { return (d.y1 + d.y0) / 2; })
-			.attr("dy", "0.35em")
-			.attr("text-anchor", "end")
-			.text(function (d) { return d.name; })
-			.filter(function (d) { return d.x0 < width / 2; })
-			.attr("x", function (d) { return d.x1 + 6; })
-			.attr("text-anchor", "start");
-	});
+		.on("mouseleave", function(d) {
+			// Set the opacity of all links back to the normal value (e.g., 1)
+			link.style("opacity", links_original_opacity);
+		});
+	// add in the title for the nodes
+	  node.append("text")
+		  .attr("x", function(d) { return d.x0 - 6; })
+		  .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+		  .attr("dy", "0.35em")
+		  .attr("text-anchor", "end")
+		  .text(function(d) { return d.name; })
+		.filter(function(d) { return d.x0 < width / 2; })
+		  .attr("x", function(d) { return d.x1 + 6; })
+		  .attr("text-anchor", "start");
+	
+	  	  
+	  node.on("click",function(d){
+		console.log(d.srcElement.__data__.name);
+		var cc_dropdown = d3.select("#dropdowncc")
+		cc_dropdown.property('value',d.srcElement.__data__.name);
+		cc_dropdown = document.querySelector("#dropdowncc");
+		cc_dropdown.dispatchEvent(new Event('change'));
+	  } );
+});
 });
