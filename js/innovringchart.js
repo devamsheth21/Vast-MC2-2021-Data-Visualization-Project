@@ -88,7 +88,15 @@ document.addEventListener('DOMContentLoaded', function()
 function UpdateData()
 {
     var selected_option = document.getElementById("dropdownloc").value;
-    var selectedcc = document.getElementById("dropdowncc").value;    
+    var selectedcc = document.getElementById("dropdowncc").value;   
+    d3.selectAll(".box_circles").style("opacity",0.1);
+    if(selected_option == 1)
+    {
+        d3.selectAll(".box_circles").style("opacity",1);
+    }
+    else{
+        d3.selectAll('#box_'+location_index[selected_option]).style("opacity",1); 
+    }
     var allcc = (selectedcc == '1')
     var alloc = (selected_option == '1')
     // console.log(selectedcc)
@@ -99,6 +107,7 @@ function UpdateData()
 }
 function UpdateChart()
 {   
+   
     UpdateData()
     days.remove()
     timelabel.remove()
@@ -218,7 +227,7 @@ function DrawChart()
             .attr("cx", function(d) { return inwidth/2 + dateToRadius(parsedate(d.date)) * Math.cos(timetoangle(d.time)); })
             .attr("cy", function(d) { return inringheight/2 + dateToRadius(parsedate(d.date)) * Math.sin(timetoangle(d.time)); })
             .attr("r", 3)
-            .attr("id",d=> "c"+d.last4ccnum + '_t'  + d.time + '_d' + d.date + '_l'+ d.location)
+            .attr("id",d=> "c"+d.last4ccnum + '_t'  + d.time + '_d' + d.date + '_l'+ d.location + "_ty" + loctype[d.location] )
             .attr("fill",d => colorMap[loctype[d.location]])
             .style("visibility","visible")
             .style("opacity",1);
@@ -289,7 +298,7 @@ function legends()
     .attr("width", 15)
     .attr("height", 15)
     .style("fill", d => colorMap[d])
-    .on('click', (d,i) =>  Updatering(i,"l"+ Object.keys(loctype)[Object.values(loctype).indexOf(i)] ));  
+    .on('click', (d,i) =>  Updatering(i,"ty"+ i ));  
 
     legendr.selectAll("text")
     .data(Object.keys(colorMap))
