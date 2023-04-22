@@ -24,7 +24,7 @@ function selectLinkByCcNum(cc_num) {
 document.addEventListener('DOMContentLoaded', function () {
 	var margin = {top: 10, right: 10, bottom: 10, left: 10},
     width = 799 - margin.left - margin.right,
-    height = 5000 - margin.top - margin.bottom;  
+    height = 1500 - margin.top - margin.bottom;  
 
 	// format variables
 	var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -144,5 +144,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		.filter(function(d) { return d.x0 < width / 2; })
 		  .attr("x", function(d) { return d.x1 + 6; })
 		  .attr("text-anchor", "start");
+	
+	  	  
+	  node.on("click",function(d){
+		console.log(d.srcElement.__data__.name);
+		var cc_dropdown = d3.select("#dropdowncc")
+		cc_dropdown.property('value',d.srcElement.__data__.name);
+		cc_dropdown = document.querySelector("#dropdowncc");
+		cc_dropdown.dispatchEvent(new Event('change'));
+	  } );
 });
 });
