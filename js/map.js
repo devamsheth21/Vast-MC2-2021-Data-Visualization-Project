@@ -1,4 +1,8 @@
+import { highlightInNetworkChartBasedOnSelection } from './network_plot.js';
+
 var abila;
+var carOwners;
+var abilaPath;
 var kronos;
 var svg_map;
 var abilaProjection;
@@ -39,6 +43,7 @@ document.addEventListener('DOMContentLoaded',function(){
         //console.log(gdc);
         // console.log(gpsData[1].Timestamp);
         // console.log(carIds);
+        document.getElementById('play').addEventListener('click', timelapse);
         mapcolor = d3.scaleOrdinal().domain(carIds).range(colorArray);
         svg_map = d3.select('#map_svg');
         date = new Date(document.getElementById('date').value);
@@ -150,7 +155,7 @@ function addCars(carIds){
                 plotGPS();
                 
             })
-    carOwnersFiltered = carOwners.filter(d => (carIds.includes(parseInt(d.CarID))));
+    var carOwnersFiltered = carOwners.filter(d => (carIds.includes(parseInt(d.CarID))));
     svg_cars.selectAll('.carIds')
             .data(carIds)
             .join('text')
@@ -195,9 +200,10 @@ function addCars(carIds){
 }
 
 function updateData(car){
+    highlightInNetworkChartBasedOnSelection(car);
     // console.log(gdc[date.getDate()][1]);
     //console.log(gdc[date.getDate()][car]);
-    // console.log(car);
+    console.log(car);
     if(selected_cars.includes(car)){
         plotData[car] = gdc[date.getDate()][car];
     }else{
@@ -222,7 +228,7 @@ function updateData(car){
     // console.log(data[data.length-1].Timestamp);
     timeMinMax.min = new Date(mapdata[0].Timestamp)
     timeMinMax.max = new Date(mapdata[mapdata.length-1].Timestamp);
-    console.log(Object.values(timeMinMax));
+    // console.log(Object.values(timeMinMax));
 }
 
 function timelapse() {

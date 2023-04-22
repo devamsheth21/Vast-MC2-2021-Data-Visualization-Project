@@ -9,12 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/circular-bar-plot.js"></script>
-    <script src="js/map.js"></script>
-    <script src="js/innovringchart.js"></script>
+    <script src="js/map.js" type="module"></script>
+    <script src="js/innovringchart.js" type="module"></script>
     <link rel="shortcut icon" href="#">
     <script src="js/box-plot.js"></script>
     <script src="js/sanky.js"></script>
-    <script src="js/network_plot.js"></script>
+    <script src="js/network_plot.js" type="module"></script>
     <link rel="stylesheet" href="style/main_style.css"></head>
 
 <body>
@@ -27,10 +27,10 @@
             <div class="ringcontainer" >
             <div id="panel" class="border border-dark rounded bg-light shadow-sm">
             <label for="global-indicator-select">Interact:</label>
-            <select onchange="UpdateChart()" id="dropdownloc">
+            <select  id="dropdownloc">
                 <option value=1> All</option>
             </select>
-            <select onchange="UpdateChart()" id="dropdowncc">
+            <select  id="dropdowncc">
                 <option value=1> All</option>
             </select>
              </div>
@@ -51,7 +51,7 @@
             <div id="map_div">
                 <svg id="map_cars"></svg>
             </div>
-            <button type="button" id="play" onclick="timelapse()">Play</button>
+            <button type="button" id="play">Play</button>
 
         </div>
         <div id="question_4_div" class="border border-dark rounded bg-light shadow-sm">
