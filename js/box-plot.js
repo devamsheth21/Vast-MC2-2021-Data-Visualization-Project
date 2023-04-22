@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .attr("transform",
       "translate(" + margin_box.left + "," + margin_box.top + ")");
   // Read the data and compute summary statistics for each specie
-  d3.csv("MC2/cc_data_box.csv").then(function (values) {
+  d3.csv("MC2/cc_data.csv").then(function (values) {
     data = values
     // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
     var sumstat = d3.rollup(data, function (d) {
