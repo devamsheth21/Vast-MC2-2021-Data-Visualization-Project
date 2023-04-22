@@ -61,13 +61,28 @@
     float: right;
 }
 
+#map_div {
+    width: 350px;
+    height: 800px;
+    overflow-y: scroll;
+}
 #map_svg {
     width: 1200px;
-    height: 1000px;
+    height:800px;
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 3px;
+    display: block;
     float: left;
+}
+#map_cars {
+    width: 350px;
+    height:1050px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    display: block;
+    float: right;
 }
 
 #network_svg {
@@ -78,35 +93,8 @@
     border-radius: 3px;
 }
 
-/* #map_div {
-        width: 350px;
-        height: 800px;
-        overflow-y: scroll;
-    } */
-/* #map_svg {
-        width: 1200px;
-        height:800px;
-        background-color: white;
-        border: 1px solid lightgray;
-        border-radius: 3px;
-        display: block;
-    } */
-#map_cars {
-    width: 350px;
-    height: 1050px;
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    display: block;
-    float: right;
-}
 #sanky_div{
     width: 820px;
-    height: 800px;
-    overflow-y: scroll;
-} 
-#map_div {
-    width: 350px;
     height: 800px;
     overflow-y: scroll;
 }
