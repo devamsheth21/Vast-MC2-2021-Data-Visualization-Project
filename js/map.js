@@ -1,14 +1,14 @@
 var abila;
 var kronos;
-var svg;
+var svg_map;
 var abilaProjection;
-var margin = {top:20, right:20, bottom:40, left:40},
-    width = 1180 - margin.left - margin.right,
-    height = 754 - margin.top - margin.bottom;
+var mapmargin = {top:20, right:20, bottom:40, left:40},
+    mapwidth = 1180 - mapmargin.left - mapmargin.right,
+    mapheight = 754 - mapmargin.top - mapmargin.bottom;
 
 var gpsData;
-var data = [];
-var color;
+var mapdata = [];
+var mapcolor;
 var sortByTime = function (a, b) { return new Date(a.Timestamp).getTime() - new Date(b.Timestamp).getTime() };
 var svg_cars;
 var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded',function(){
         //console.log(gdc);
         // console.log(gpsData[1].Timestamp);
         // console.log(carIds);
-        color = d3.scaleOrdinal().domain(carIds).range(colorArray);
-        svg = d3.select('#map_svg');
+        mapcolor = d3.scaleOrdinal().domain(carIds).range(colorArray);
+        svg_map = d3.select('#map_svg');
         date = new Date(document.getElementById('date').value);
         date = new Date(+date + date.getTimezoneOffset()*60000);
         drag = d3.drag();
@@ -49,16 +49,16 @@ document.addEventListener('DOMContentLoaded',function(){
 
         //console.log(temp.getDate() == date.getDate());
         
-        svg.append('image')
+        svg_map.append('image')
             .attr('x',0)
             .attr('y',0)
             .attr('xlink:href','data/MC2-tourist.jpg')
-            .attr('height',height)
-            .attr('width',width)
+            .attr('height',mapheight)
+            .attr('width',mapwidth)
             .attr('class','image')
             .attr('opacity',0.75);
         abilaProjection = d3.geoEquirectangular()
-                            .fitSize([width,height],abila);
+                            .fitSize([mapwidth,mapheight],abila);
         //console.log(usaProjection);
         
         abilaPath = d3.geoPath().projection(abilaProjection);
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded',function(){
 })
 
 function plotAbila(){
-    svg.selectAll('.abila')
+    svg_map.selectAll('.abila')
         .data(abila.features)
         .join('path')
         .attr('class','abila')
@@ -82,19 +82,19 @@ function plotAbila(){
     
     xScale = d3.scaleLinear()
                     .domain([0,24])
-                    .range([margin.left,width]);
+                    .range([mapmargin.left,mapwidth]);
 
     var xAxis = d3.axisBottom()
                     .scale(xScale);
 
-    svg.append('g')
-        .attr('transform','translate('+margin.bottom+','+height+')')
+    svg_map.append('g')
+        .attr('transform','translate('+mapmargin.bottom+','+mapheight+')')
         .call(xAxis);
 }
 
 function plotGPS(){
-    svg.selectAll('.gps')
-        .data(data)
+    svg_map.selectAll('.gps')
+        .data(mapdata)
         .join(
             function(enter){
                 return enter
@@ -105,21 +105,21 @@ function plotGPS(){
         .attr('cx',d => abilaProjection([+d.long,+d.lat])[0])
         .attr('cy',d => abilaProjection([+d.long,+d.lat])[1])
         .attr('r',3)
-        .style('fill', (d => color(d.id)))
+        .style('fill', (d => mapcolor(d.id)))
         .style('opacity',0.5)
         .call(drag)
     
-    svg.selectAll('.timeline').remove();
-    svg.selectAll('.timeline')
+    svg_map.selectAll('.timeline').remove();
+    svg_map.selectAll('.timeline')
         .data(Object.entries(timeMinMax))
         .enter()
         .append('line')
         .attr('class','timeline')
         .attr('id',d => 'timeline'+d[0])
-        .attr('x1', d =>  xScale(+d[1].getHours()+d[1].getMinutes()/60)+margin.bottom)
-        .attr('y1',height-10)
-        .attr('x2', d => xScale(+d[1].getHours()+d[1].getMinutes()/60) + margin.bottom)
-        .attr('y2',height+10)
+        .attr('x1', d =>  xScale(+d[1].getHours()+d[1].getMinutes()/60)+mapmargin.bottom)
+        .attr('y1',mapheight-10)
+        .attr('x2', d => xScale(+d[1].getHours()+d[1].getMinutes()/60) + mapmargin.bottom)
+        .attr('y2',mapheight+10)
         .attr('stroke','red')
         .attr('stroke-width','5px')
 }
@@ -136,7 +136,7 @@ function addCars(carIds){
             .attr('y',(d,i) => (i+1)*25)
             .attr('height',20)
             .attr('width',20)
-            .attr('fill', (d,i) => color(d))
+            .attr('fill', (d,i) => mapcolor(d))
             .on('click',(d,i) => {
                 if(!selected_cars.includes(d.target.id)){
                     selected_cars.push(d.target.id);
@@ -205,10 +205,10 @@ function updateData(car){
     }
 
     //console.log(plotData);
-    data = [];
+    mapdata = [];
     Object.entries(plotData).map(pd => {
         pd[1].map(item => {
-            data.push(item);
+            mapdata.push(item);
         });
     });
     //console.log(data);
@@ -217,40 +217,40 @@ function updateData(car){
     //     if(selected_cars.includes(gps.id))
     //     data.push(gps);
     // })
-    data.sort(sortByTime);
+    mapdata.sort(sortByTime);
     // console.log(data[0].Timestamp);
     // console.log(data[data.length-1].Timestamp);
-    timeMinMax.min = new Date(data[0].Timestamp)
-    timeMinMax.max = new Date(data[data.length-1].Timestamp);
+    timeMinMax.min = new Date(mapdata[0].Timestamp)
+    timeMinMax.max = new Date(mapdata[mapdata.length-1].Timestamp);
     console.log(Object.values(timeMinMax));
 }
 
 function timelapse() {
     //data.sort(sortByTime);
-    svg.selectAll('#timelinemin')
+    svg_map.selectAll('#timelinemin')
         .transition()
-        .duration(data.length*5+500)
+        .duration(mapdata.length*5+500)
         .ease(d3.easeLinear)
-        .attr('x1', xScale(+timeMinMax.max.getHours()+timeMinMax.max.getMinutes()/60)+margin.bottom)
-        .attr('y1',height-10)
-        .attr('x2', xScale(+timeMinMax.max.getHours()+timeMinMax.max.getMinutes()/60) + margin.bottom)
-        .attr('y2',height+10)
+        .attr('x1', xScale(+timeMinMax.max.getHours()+timeMinMax.max.getMinutes()/60)+mapmargin.bottom)
+        .attr('y1',mapheight-10)
+        .attr('x2', xScale(+timeMinMax.max.getHours()+timeMinMax.max.getMinutes()/60) + mapmargin.bottom)
+        .attr('y2',mapheight+10)
         .attr('stroke','red')
         .attr('stroke-width','5px')
         .on('end',(d,i) => {
-            svg.selectAll('#timelinemin')
-                .attr('x1', xScale(+timeMinMax.min.getHours()+timeMinMax.min.getMinutes()/60)+margin.bottom)
-                .attr('y1',height-10)
-                .attr('x2', xScale(+timeMinMax.min.getHours()+timeMinMax.min.getMinutes()/60) + margin.bottom)
-                .attr('y2',height+10)
+            svg_map.selectAll('#timelinemin')
+                .attr('x1', xScale(+timeMinMax.min.getHours()+timeMinMax.min.getMinutes()/60)+mapmargin.bottom)
+                .attr('y1',mapheight-10)
+                .attr('x2', xScale(+timeMinMax.min.getHours()+timeMinMax.min.getMinutes()/60) + mapmargin.bottom)
+                .attr('y2',mapheight+10)
                 .attr('stroke','red')
                 .attr('stroke-width','5px')
         })
     
-    svg.selectAll('.gps').remove();
+    svg_map.selectAll('.gps').remove();
 
-    svg.selectAll('.gps')
-        .data(data)
+    svg_map.selectAll('.gps')
+        .data(mapdata)
         .join(
             function(enter){
                 return enter
@@ -269,7 +269,7 @@ function timelapse() {
             return i*5;
         })
         .style('opacity',0.5)
-        .style('fill', (d => color(d.id)))
+        .style('fill', (d => mapcolor(d.id)))
 
     
 }
@@ -281,15 +281,15 @@ function dateOnChange(input) {
     selected_cars.map(sc => {
         plotData[sc] = gdc[date.getDate()][sc];
     })
-    data = [];
+    mapdata = [];
     Object.entries(plotData).map(pd => {
         pd[1].map(item => {
-            data.push(item);
+            mapdata.push(item);
         });
     });
-    data.sort(sortByTime);
-    timeMinMax.min = new Date(data[0].Timestamp)
-    timeMinMax.max = new Date(data[data.length-1].Timestamp);
+    mapdata.sort(sortByTime);
+    timeMinMax.min = new Date(mapdata[0].Timestamp)
+    timeMinMax.max = new Date(mapdata[mapdata.length-1].Timestamp);
     console.log(Object.values(timeMinMax));
     plotGPS();
 }
