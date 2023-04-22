@@ -35,14 +35,16 @@
     float: left;
 }
 
+
 #ring_svg {
     width: 100%;
-    height: 900px;
-    background-color: white;
+    height: 1000px;
+    background-color:blanchedalmond;
     border: 1px solid lightgray;
     border-radius: 3px;
     /* float: right; */
 }
+
 
 #shankey_svg {
     /* width: 40%; */
