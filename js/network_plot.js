@@ -1,7 +1,16 @@
+var node;
+var link;
+var netData;
+var NodeNameToNodeIdMapping = {};
+// var CarNameToNodeIdMapping = {};
+
 document.addEventListener('DOMContentLoaded', function () {
   d3.json('MC2/network-plot.json')
     .then(function (values) {
       // console.log(data);
+      netData = values;
+      MapNodeNameToNodeId(values);
+      // MapCarNameToNodeId(values);
       drawNetworkPlot(values);
     });
 });
@@ -25,16 +34,17 @@ function drawNetworkPlot(netData) {
   }
   var color = d3.scaleOrdinal().domain(type).range(d3.schemeSet2);
   // Initialize the links
-  var link = svg
+  link = svg
     .selectAll("line")
     .data(netData.links)
     .enter()
     .append("line")
     .style("stroke", "#aaa")
+    .attr('class', 'network_chart_links')
     .attr("id", d => "l" + d.source + "_" + d.target)
 
   // Initialize the nodes
-  var node = svg
+  node = svg
     .selectAll("circle")
     .data(netData.nodes)
     .enter()
@@ -46,32 +56,11 @@ function drawNetworkPlot(netData) {
     .attr("id", d => "a" + d.id)
     .on("mouseover", function (d, i) {
       var id = d.target.id;
-      netData.links.map(x => {
-
-        if ("a" + x.source.id === id) {
-          d3.select("#a" + x.target.id).attr("r", 25)
-          d3.select("#l" + x.source.id + "_" + x.target.id).style("stroke", "blue").style("stroke-width", "3px")
-        }
-        if ("a" + x.target.id === id) {
-          d3.select("#a" + x.source.id).attr("r", 25)
-          d3.select("#l" + x.source.id + "_" + x.target.id).style("stroke", "blue").style("stroke-width", "3px")
-        }
-      })
+      highlightBasedOnNodeId(id);
     })
     .on("mouseout", function (d, i) {
-
       var id = d.target.id;
-      netData.links.map(x => {
-
-        if ("a" + x.source.id === id) {
-          d3.select("#a" + x.target.id).attr("r", 20)
-          d3.select("#l" + x.source.id + "_" + x.target.id).style("stroke", "#aaa").style("stroke-width", "1px")
-        }
-        if ("a" + x.target.id === id) {
-          d3.select("#a" + x.source.id).attr("r", 20)
-          d3.select("#l" + x.source.id + "_" + x.target.id).style("stroke", "#aaa").style("stroke-width", "1px")
-        }
-      })
+      highlightBasedOnNodeId(id, true);
     })
 
 
@@ -126,4 +115,87 @@ function drawNetworkPlot(netData) {
   }
 }
 
+function MapNodeNameToNodeId(data) {
+  for (var node of data["nodes"]) {
+      NodeNameToNodeIdMapping[node['name']] = node['id'];
+  }
+}
+
+// function MapCarNameToNodeId(data) {
+//   for (var node of data["nodes"]) {
+//     if (node['group'] > 0) {
+//       CarNameToNodeIdMapping[node['name']] = node['id'];
+//     }
+//   }
+// }
+
+function highlightBasedOnNodeId(id, reset = false) {
+  console.log(id);
+  var r = 25;
+  var stroke = "#555";
+  var strokeWidth = "4px";
+  var remainingLinksOpacity = 0.2;
+
+  if (reset) {
+    r = 20;
+    stroke = "#aaa";
+    strokeWidth = "1px";
+    remainingLinksOpacity = 1;
+
+    netData.links.map(x => {
+        d3.select("#a" + x.target.id).attr("r", r)
+        d3.select("#l" + x.source.id + "_" + x.target.id)
+        .style("stroke", stroke)
+        .style("stroke-width", strokeWidth)
+        .style("opacity", 1);
+
+        d3.select("#a" + x.source.id).attr("r", r)
+        d3.select("#l" + x.source.id + "_" + x.target.id)
+        .style("stroke", stroke)
+        .style("stroke-width", strokeWidth)
+        .style("opacity", 1);
+    })
+  }
+
+  netData.links.map(x => {
+    if ("a" + x.source.id === id) {
+      d3.select("#a" + x.target.id).attr("r", r)
+      d3.select("#l" + x.source.id + "_" + x.target.id)
+      .style("stroke", stroke)
+      .style("stroke-width", strokeWidth)
+      .style("opacity", 1);
+    }
+    else{
+      d3.select("#l" + x.source.id + "_" + x.target.id)
+      .style("opacity", remainingLinksOpacity);
+    }
+    if ("a" + x.target.id === id) {
+      d3.select("#a" + x.source.id).attr("r", r)
+      d3.select("#l" + x.source.id + "_" + x.target.id)
+      .style("stroke", stroke)
+      .style("stroke-width", strokeWidth)
+      .style("opacity", 1);
+    }
+    // else{
+    //   d3.select("#l" + x.source.id + "_" + x.target.id)
+    //   .style("opacity", remainingLinksOpacity);
+    // }
+  })
+}
+
+export function highlightInNetworkChartBasedOnSelection(selectedName) {
+  console.log(selectedName);
+  var r = 20;
+  var stroke = "#aaa";
+  var strokeWidth = "1px";
+  var remainingLinksOpacity = 1;
+
+  d3.selectAll('.network_chart_links')
+  .attr("r", r)
+  .style("stroke", stroke)
+  .style("stroke-width", strokeWidth)
+  .style("opacity", remainingLinksOpacity);
+
+  highlightBasedOnNodeId("a"+NodeNameToNodeIdMapping[selectedName]);
+}
 
