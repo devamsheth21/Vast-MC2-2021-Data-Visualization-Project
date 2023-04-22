@@ -24,7 +24,7 @@ car_id,location
 4,Cup o'Joe
 4,Ouzeri Elian
 4,Kronos Mart
-4,Katerinas Caf
+4,Katerina's Cafe
 4,Frydos Autosupply n' More
 4,Hallowed Grounds
 4,Desafio Golf Course
@@ -39,7 +39,7 @@ car_id,location
 19,Ouzeri Elian
 19,Hippokampos
 19,Albert's Fine Clothing
-19,Katerinas Caf
+19,Katerina's Cafe
 19,carly's coffee
 19,Kalami Kafenion
 19,Octavio's Office Supplies
@@ -51,7 +51,7 @@ car_id,location
 10,Jack's Magical Beans
 10,Cup o'Joe
 10,GAStect
-10,Katerinas Caf
+10,Katerina's Cafe
 10,Hippokampos
 10,carly's coffee
 10,Gelatogalore
@@ -74,7 +74,7 @@ car_id,location
 7,Chostus Hotel
 7,Gelatogalore
 7,Abila Zacharo
-7,Katerinas Caf
+7,Katerina's Cafe
 7,Hallowed Grounds
 7,Albert's Fine Clothing
 7,Kalami Kafenion
@@ -91,7 +91,7 @@ car_id,location
 11,Hallowed Grounds
 11,Frydos Autosupply n' More
 11,Guy's Gyros
-11,Katerinas Caf
+11,Katerina's Cafe
 11,carly's coffee
 11,Abila Zacharo
 11,Albert's Fine Clothing
@@ -103,7 +103,7 @@ car_id,location
 32,Guy's Gyros
 32,Frydos Autosupply n' More
 32,Ouzeri Elian
-32,Katerinas Caf
+32,Katerina's Cafe
 32,Brew've Been Served
 32,Kronos Mart
 32,Albert's Fine Clothing
@@ -127,10 +127,10 @@ car_id,location
 34,Chostus Hotel
 34,Ahaggo Museum
 34,Ouzeri Elian
-34,Katerinas Caf
+34,Katerina's Cafe
 34,Abila Zacharo
 34,kronos capitol
-17,Katerinas Caf
+17,Katerina's Cafe
 17,Brew've Been Served
 17,GAStect
 17,Guy's Gyros
@@ -156,7 +156,7 @@ car_id,location
 12,Guy's Gyros
 12,carly's coffee
 12,Kalami Kafenion
-12,Katerinas Caf
+12,Katerina's Cafe
 12,General Grocer
 12,Ouzeri Elian
 12,Chostus Hotel
@@ -167,7 +167,7 @@ car_id,location
 18,Carlyle Chemical Inc.
 18,Abila Hospital
 18,GAStect
-18,Katerinas Caf
+18,Katerina's Cafe
 18,Guy's Gyros
 18,Frydos Autosupply n' More
 18,Cup o'Joe
@@ -213,7 +213,7 @@ car_id,location
 16,Jack's Magical Beans
 16,Cup o'Joe
 16,Kalami Kafenion
-16,Katerinas Caf
+16,Katerina's Cafe
 16,Ahaggo Museum
 16,Chostus Hotel
 16,Hippokampos
@@ -222,7 +222,7 @@ car_id,location
 6,carly's coffee
 6,Octavio's Office Supplies
 6,Gelatogalore
-6,Katerinas Caf
+6,Katerina's Cafe
 6,Cup o'Joe
 6,Hippokampos
 6,Guy's Gyros
@@ -255,7 +255,7 @@ car_id,location
 26,Brew've Been Served
 26,Frydos Autosupply n' More
 26,Gelatogalore
-26,Katerinas Caf
+26,Katerina's Cafe
 26,Cup o'Joe
 26,Hippokampos
 26,Jack's Magical Beans
@@ -284,7 +284,7 @@ car_id,location
 29,Coffee Cameleon
 29,GAStect
 29,Ouzeri Elian
-29,Katerinas Caf
+29,Katerina's Cafe
 29,Cup o'Joe
 29,Gelatogalore
 29,carly's coffee
@@ -306,7 +306,7 @@ car_id,location
 21,General Grocer
 21,Abila Zacharo
 21,Roberts and Sons
-21,Katerinas Caf
+21,Katerina's Cafe
 21,Gelatogalore
 21,Octavio's Office Supplies
 21,Hallowed Grounds
@@ -324,7 +324,7 @@ car_id,location
 14,Carlyle Chemical Inc.
 14,Abila Hospital
 14,GAStect
-14,Katerinas Caf
+14,Katerina's Cafe
 14,carly's coffee
 14,Gelatogalore
 14,Cup o'Joe
@@ -340,7 +340,7 @@ car_id,location
 14,Ahaggo Museum
 14,Bean There Done That
 14,Kalami Kafenion
-33,Katerinas Caf
+33,Katerina's Cafe
 33,Brew've Been Served
 33,GAStect
 33,Ouzeri Elian
@@ -366,7 +366,7 @@ car_id,location
 13,Coffee Cameleon
 13,Shoppers' Delight
 13,Kalami Kafenion
-13,Katerinas Caf
+13,Katerina's Cafe
 13,Ouzeri Elian
 13,Nationwide Refinery
 13,Chostus Hotel
@@ -394,7 +394,7 @@ car_id,location
 27,GAStect
 27,carly's coffee
 27,Gelatogalore
-27,Katerinas Caf
+27,Katerina's Cafe
 27,Hippokampos
 27,Octavio's Office Supplies
 27,Kalami Kafenion
@@ -407,7 +407,7 @@ car_id,location
 8,GAStect
 8,Gelatogalore
 8,Octavio's Office Supplies
-8,Katerinas Caf
+8,Katerina's Cafe
 8,Guy's Gyros
 8,Ouzeri Elian
 8,Frydos Autosupply n' More
@@ -426,11 +426,11 @@ car_id,location
 101,Stewart and Sons Fabrication
 101,Nationwide Refinery
 101,Shoppers' Delight
-101,Katerinas Caf
+101,Katerina's Cafe
 101,Frydos Autosupply n' More
 101,General Grocer
 24,Frydos Autosupply n' More
-24,Katerinas Caf
+24,Katerina's Cafe
 24,Brew've Been Served
 24,GAStect
 24,carly's coffee
@@ -452,7 +452,7 @@ car_id,location
 24,Cup o'Joe
 24,Gelatogalore
 24,Octavio's Office Supplies
-23,Katerinas Caf
+23,Katerina's Cafe
 23,Brew've Been Served
 23,GAStect
 23,carly's coffee
@@ -470,7 +470,7 @@ car_id,location
 23,Kronos Mart
 25,Coffee Cameleon
 25,GAStect
-25,Katerinas Caf
+25,Katerina's Cafe
 25,Frydos Autosupply n' More
 25,Cup o'Joe
 25,Ouzeri Elian
@@ -485,7 +485,7 @@ car_id,location
 25,Abila Zacharo
 25,kronos capitol
 25,Shoppers' Delight
-30,Katerinas Caf
+30,Katerina's Cafe
 30,Brew've Been Served
 30,GAStect
 30,Guy's Gyros
@@ -504,7 +504,7 @@ car_id,location
 15,Guy's Gyros
 15,Brew've Been Served
 15,GAStect
-15,Katerinas Caf
+15,Katerina's Cafe
 15,Frydos Autosupply n' More
 15,Chostus Hotel
 15,Ahaggo Museum
@@ -531,7 +531,7 @@ car_id,location
 5,Jack's Magical Beans
 5,Cup o'Joe
 5,GAStect
-5,Katerinas Caf
+5,Katerina's Cafe
 5,Roberts and Sons
 5,Abila Zacharo
 5,carly's coffee
@@ -541,7 +541,7 @@ car_id,location
 5,General Grocer
 5,Kronos Mart
 5,Hippokampos
-22,Katerinas Caf
+22,Katerina's Cafe
 22,Brew've Been Served
 22,GAStect
 22,Abila Zacharo
@@ -565,7 +565,7 @@ car_id,location
 9,Hippokampos
 9,Kalami Kafenion
 9,carly's coffee
-9,Katerinas Caf
+9,Katerina's Cafe
 9,Ouzeri Elian
 9,Gelatogalore
 9,Guy's Gyros
@@ -581,14 +581,14 @@ car_id,location
 107,Maximum Iron and Steel
 107,General Grocer
 107,Carlyle Chemical Inc.
-107,Katerinas Caf
+107,Katerina's Cafe
 104,Abila Airport
 104,GAStect
 105,Cup o'Joe
 105,Abila Hospital
 105,Carlyle Chemical Inc.
 105,Nationwide Refinery
-105,Katerinas Caf
+105,Katerina's Cafe
 105,GAStect
 106,Abila Airport
 106,Abila Scrapyard
@@ -607,6 +607,6 @@ car_id,location
 31,carly's coffee
 31,Octavio's Office Supplies
 31,Abila Zacharo
-31,Katerinas Caf
+31,Katerina's Cafe
 31,Desafio Golf Course
 31,Guy's Gyros
