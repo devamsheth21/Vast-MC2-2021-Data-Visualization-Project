@@ -170,23 +170,21 @@ document.addEventListener('DOMContentLoaded', function () {
       .style("fill", "white")
       .attr("stroke", "black")
 
-      // .on("mouseover", function (_, d) {
-      //   tooltip.style("opacity", 1);
-      //   d3.select(this).style("opacity", 1);
-      // })
+      .on("mouseover", function (_, d) {
+        tooltip.style("opacity", 1);
+        d3.select(this).style("opacity", 1);
+      })
 
-      // .on("mouseout", function (_, d) {
-      //   tooltip.html("").style("opacity", 0);
-      //   d3.select(this).style("opacity", 1);
-      // })
-      // .on("mousemove", function (event, d) {
-      //   d3.select(this).style("opacity", 0.7);
-      //   tooltip.html('Price: ' + d.price + '<br>' + 'Location: ' + d.location + '<br>' + 'Time: ' + d.timestamp + '<br>' + 'cc_num: ' + d.last4ccnum)
-      //     .style("left", event.clientX + window.scrollX + 20 + "px")
-      //     .style("top", event.clientY + window.scrollY - 20 + "px");
-      // });
-
-
+      .on("mouseout", function (_, d) {
+        tooltip.html("").style("opacity", 0);
+        d3.select(this).style("opacity", 1);
+      })
+      .on("mousemove", function (event, d) {
+        d3.select(this).style("opacity", 0.7);
+        tooltip.html('Price: ' + d.price + '<br>' + 'Location: ' + d.location + '<br>' + 'Time: ' + d.timestamp + '<br>' + 'cc_num: ' + d.last4ccnum)
+          .style("left", event.clientX + window.scrollX + 20 + "px")
+          .style("top", event.clientY + window.scrollY - 20 + "px");
+      });
 
   });
 });
