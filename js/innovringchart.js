@@ -1,5 +1,3 @@
-import { highlightInNetworkChartBasedOnSelection } from './network_plot.js';
-
 var ringdata, ringsvg, filtereddata, ringheight, ringwidth, inwidth, inringheight, maxRadius, minRadius, parseTime, parsedate;
 var dateToRadius, timeScale, uniquedates;
 var loc, cc;
