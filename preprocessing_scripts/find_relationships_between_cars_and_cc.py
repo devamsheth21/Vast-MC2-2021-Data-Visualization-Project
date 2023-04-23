@@ -80,7 +80,7 @@ def merge_with_cc_loyalty_data():
                 cc_used_with_car.add(int(cc_id))
 
     for row in cc_loyalty_frequency_data:
-        if not row['cc_num'] in cc_link_fre:
+        if row['cc_num'] not in cc_link_fre:
             cc_link_fre[row['cc_num']] = 0
         cc_link_fre[row['cc_num']] += 1
     
