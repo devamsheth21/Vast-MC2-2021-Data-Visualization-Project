@@ -183,8 +183,7 @@ function highlightBasedOnNodeId(id, reset = false) {
   })
 }
 
-export function highlightInNetworkChartBasedOnSelection(selectedName) {
-  console.log(selectedName);
+function highlightInNetworkChartBasedOnSelection(selectedName) {
   var r = 20;
   var stroke = "#aaa";
   var strokeWidth = "1px";

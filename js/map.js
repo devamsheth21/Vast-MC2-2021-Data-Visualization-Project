@@ -1,5 +1,3 @@
-import { highlightInNetworkChartBasedOnSelection } from './network_plot.js';
-
 var abila;
 var carOwners;
 var abilaPath;
