@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// format variables
 	var formatNumber = d3.format(",.0f"), // zero decimal places
 		format = function (d) { return formatNumber(d); },
-		color = d3.scaleOrdinal(d3.schemeCategory10);
+		color = d3.scaleOrdinal(d3.schemeSet3);
 
 	// append the svg object to the body of the page
 	var svg = d3.select("#shankey_svg")
@@ -117,11 +117,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			.attr("width", sankey.nodeWidth())
 			.attr("nodeId", function (d) {return d.name;})
 			.style("fill", function (d) {
-				return d.color = color(d.name.replace(/ .*/, ""));
+				return "grey";
+				// return d.color = color(d.name.replace(/ .*/, ""));
 			})
-			.style("stroke", function (d) {
-				return d3.rgb(d.color).darker(2);
-			})
+			.attr('stroke-width', 0)
 			.append("title")
 			.text(function (d) {
 				return d.name + "\n" + format(d.value);
@@ -146,7 +145,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 
 		link.style("stroke", function (d) {
-			return d3.rgb(d.source.color).brighter(1);
+			return  color(d.source.index);
+			// return d3.rgb(d.source.color).brighter(0.3);
 		});
 
 		link.on("mouseover", function (d) {

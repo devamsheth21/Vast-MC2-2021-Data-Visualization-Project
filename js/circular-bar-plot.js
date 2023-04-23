@@ -8,8 +8,8 @@ const margin = { top: 100, right: 0, bottom: 0, left: 0 },
   innerRadius = 150,
   outerRadius = Math.min(width, height) / 2 - 70;
 
-const cc_color = "#1f77b4";
-const loyal_color = "#ff7f0e";
+const cc_color = "#80b1d3";
+const loyal_color = "#fb8072";
 // outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 
 document.addEventListener('DOMContentLoaded', function () {
