@@ -87,12 +87,14 @@ function drawNetworkPlot(netData) {
     // });
 
     node_text = svg
-    .selectAll("anytext")
+    .selectAll(".nodeTexts")
     .data(netData.nodes)
     .enter()
     .append('text')
+    .attr("class",'nodeTexts')
     .attr("id", d => "a" + d.id)
-    .style("opacity", 0)
+    .style("opacity", 0.2)
+    .style('font-size',"10px")
     .text(d => {
       if(d.group==0)
       return d.name
@@ -223,14 +225,12 @@ function highlightBasedOnNodeId(id, reset = false) {
       .style('filter', remainingNodeFilter)
       .style('opacity', remainingNodeOpacity);
 
-    node_text.style('opacity', 0);
+    node_text.style('opacity', 0.2);
   }
-
+  else{
   node
   .style('filter', remainingNodeFilter)
   .style('opacity', remainingNodeOpacity);
-
-  node_text.style('opacity', 0);
 
   d3.selectAll('#'+id)
   .style('filter', "grayscale(0)")
@@ -266,6 +266,7 @@ function highlightBasedOnNodeId(id, reset = false) {
     //   .style("opacity", remainingLinksOpacity);
     // }
   })
+}
 }
 
 function highlightInNetworkChartBasedOnSelection(selectedName) {
@@ -305,7 +306,7 @@ function highlightBasedOnGroupId(groupId, reset=false) {
         .style("stroke-width", strokeWidth)
         .style("opacity", 1);
 
-        d3.select("#l" + x.source.id + "_" + x.target.id)
+        d3.select("#l" + x.target.id + "_" + x.source.id)
         .style("stroke", stroke)
         .style("stroke-width", strokeWidth)
         .style("opacity", 1);
@@ -314,7 +315,9 @@ function highlightBasedOnGroupId(groupId, reset=false) {
     node
       .style('filter', remainingNodeFilter)
       .style('opacity', remainingNodeOpacity);
+      node_text.style('opacity', 0.2);
   }
+  else{
 
   node
   .style('filter', remainingNodeFilter)
@@ -322,11 +325,11 @@ function highlightBasedOnGroupId(groupId, reset=false) {
 
   netData.links.map(x => {
     if ("g" + x.source.group === groupId) {
-      d3.select("#a" + x.target.id)
+      d3.selectAll("#a" + x.target.id)
       .style('filter', "grayscale(0)")
       .style('opacity', 1);
 
-      d3.select("#a" + x.source.id)
+      d3.selectAll("#a" + x.source.id)
       .style('filter', "grayscale(0)")
       .style('opacity', 1);
 
@@ -340,5 +343,6 @@ function highlightBasedOnGroupId(groupId, reset=false) {
       .style("opacity", remainingLinksOpacity);
     }
   })
+}
 }
 
