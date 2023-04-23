@@ -189,6 +189,7 @@ function addCars(carIds){
                     var index = selected_cars.indexOf(d.target.__data__.CarID);
                     if(index != -1){
                         selected_cars.splice(index,1);
+                        //console.log(selected_cars);
                     }
                 }
                 updateData(d.target.__data__.CarID);
@@ -224,8 +225,11 @@ function updateData(car){
     mapdata.sort(sortByTime);
     // console.log(data[0].Timestamp);
     // console.log(data[data.length-1].Timestamp);
-    timeMinMax.min = new Date(mapdata[0].Timestamp)
-    timeMinMax.max = new Date(mapdata[mapdata.length-1].Timestamp);
+    if(selected_cars.length!=0){
+        timeMinMax.min = new Date(mapdata[0].Timestamp)
+        timeMinMax.max = new Date(mapdata[mapdata.length-1].Timestamp);
+    }
+    
     // console.log(Object.values(timeMinMax));
 }
 
@@ -309,3 +313,4 @@ function dragged() {
 function dragended() {
 
 }
+//module.exports = {selected_cars};

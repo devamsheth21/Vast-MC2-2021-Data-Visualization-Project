@@ -1,5 +1,6 @@
 links_original_opacity = 0.7;
-
+//const {selected_cars} = require('./map.js');
+var carNodeClicked = false;
 function selectLinkByCcNum(cc_num) {
 	// Find the link with the matching source cc_num
 	if (cc_num == '1') {
@@ -173,6 +174,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	  	  
 	  node.on("click",function(d){
 		console.log(d.srcElement.__data__.name);
+		if(selected_cars.includes(d.srcElement.__data__.name))
+		{
+			var index = selected_cars.indexOf(d.target.__data__.CarID);
+			selected_cars.splice(index,1);
+			//console.log(selected_cars);
+		}
+		else{
+			selected_cars.push(d.srcElement.__data__.name);
+		}
+		updateData(d.srcElement.__data__.name);
+		plotGPS();
 		var cc_dropdown = d3.select("#dropdowncc")
 		cc_dropdown.property('value',d.srcElement.__data__.name);
 		cc_dropdown = document.querySelector("#dropdowncc");
