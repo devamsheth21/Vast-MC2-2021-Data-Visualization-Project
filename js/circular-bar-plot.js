@@ -204,30 +204,12 @@ function drawCircularBarPlot() {
     })
     .on("mouseout", function (_, d) {
       tooltip.html("").style("opacity", 0);
-      d3.select(this).style("opacity", 1);
+      d3.select(this).style("opacity", 0.7);
     })
     .on("mousemove", function (event, d) {
-      d3.select(this).style("opacity", 0.7);
       tooltip.html('Total Transactions: ' + d['loyalty_count'] + '<br>' + 'Location: ' + d.location)
         .style("left", event.clientX + window.scrollX + 20 + "px")
         .style("top", event.clientY + window.scrollY - 20 + "px");
-    })
-    .on("click", function(event,d){
-      if(clicked == null)
-      {
-      d3.selectAll('.lc_bars').style("opacity",0.1);
-      d3.select(this).style("opacity",1);
-      d3.selectAll(".box_circles").style("opacity",0.1);
-      d3.selectAll('#box_'+location_index[d.location]).style("opacity",1);
-      opacity = 0.1;
-      clicked = location_index[d.location];
-      }
-      else
-      {
-        clicked = null;
-        opacity = 0.6
-        d3.selectAll('.lc_bars').style("opacity", opacity);
-      }
     });
 
 }
