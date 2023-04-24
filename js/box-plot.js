@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add individual points with jitter
 
-    var tooltip = d3.select("#question_2_div")
+    var tooltip = d3.select("#box_plot_div")
       .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
