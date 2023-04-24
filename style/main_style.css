@@ -125,9 +125,12 @@ body {
 }
 
 #ring_svg {
-    width: 100%;
+    width: 645px;
     height: 655px;
     background-color: white;
+    position:relative; 
+    top:-12px;
+    left:-11px
     /* border: 1px solid lightgray; */
     /* border-radius: 3px; */
     /* float: right; */

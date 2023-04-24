@@ -132,13 +132,13 @@ function Updatering(d, i) {
 
   if (i == 'dALL') {
     ringsvg.selectAll(".transactions")
-      .style('stroke', border_color)
+      .style('stroke', "black")
       .style('stroke-width', 0.5)
       .style("visibility", "visible");
   }
   else {
     d3.selectAll('[id*="' + i + '"]')
-      .style('stroke', border_color)
+      .style('stroke', "black")
       .style('stroke-width', 0.5)
       .style("visibility", "visible");
   }
@@ -157,7 +157,7 @@ function DrawChart() {
   .append("div")
   .style("opacity", 0)
   .attr("class", "tooltipring")
-  .style("background-color", border_color)
+  .style("background-color", "white")
   .style("color", "black")
   .style("border", "solid")
   .style("border-width", "2px")
@@ -235,7 +235,7 @@ function DrawChart() {
       tooltipring.style("opacity", 1);
       time.style("opacity", 0.3);
       d3.select(this).style("opacity", 1);
-      d3.select(this).style("stroke", border_color);
+      d3.select(this).style("stroke", "white");
     })
     .on("mouseout", function (_, d) {
       time.style("opacity", 1)
@@ -282,8 +282,16 @@ function legends() {
     .attr("class", "legend")
     .attr("width", legendWidth)
     .attr("height", legendHeight)
-    .attr("transform", 'translate(583,0)');
+    .attr("transform", 'translate(600,10)');
    
+    legendr.append("text")
+    .attr("x", -40)
+    .attr("y", 3)
+    .attr("text-anchor", "middle")
+    .attr('fill', "black")
+    .attr("font-weight",620)
+    .attr("font-family","Serif")
+    .text("Select Categrories")
 
   var clickedty = null
   var rectty = legendr.selectAll("legrect")
@@ -308,7 +316,7 @@ function legends() {
     }
     else {
       rectty.style("stroke", "black")
-      d3.select(this).style("stroke", border_color)
+      d3.select(this).style("stroke", "red")
       clickedty = i;
       Updatering(i, "ty" + i);
 
@@ -340,6 +348,7 @@ function calend() {
   var gridSize = 22,
     padding = 5;
   uniquedates.add('ALL')
+ 
 
   cal.append("text")
     .attr("x", 60)
