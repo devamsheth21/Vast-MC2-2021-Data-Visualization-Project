@@ -119,7 +119,7 @@ function drawCircularBarPlot() {
     .domain([1, 220]);
 
   // Tooltip
-  var tooltip = d3.select("#question_1_div")
+  var tooltip = d3.select("#left-circular-div")
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
