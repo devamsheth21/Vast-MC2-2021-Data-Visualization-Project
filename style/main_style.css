@@ -204,3 +204,25 @@ body {
     margin: 5px;
 }
 
+@font-face {
+    font-family: "Voltaire-Frangela";
+    src: url("./../font/Voltaire-Frangela.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "bariol";
+    src: url("./../font/bariol_regular-webfont.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Andiela-Sathony";
+    src: url("./../font/Andiela-Sathony.ttf") format("truetype");
+}
+
+#project_title{
+    font-family: Voltaire-Frangela;
+}
+
+#project_team_names{
+    font-family: Andiela-Sathony;
+}

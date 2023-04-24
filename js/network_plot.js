@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function drawNetworkPlot(netData) {
-  var margin = { top: 10, right: 30, bottom: 100, left: 100 },
-    width = 1200 - margin.left - margin.right,
-    height = 1000 - margin.top - margin.bottom;
+  var margin = { top: 50, right: 30, bottom: 100, left: 260 },
+    width = 900 - margin.left - margin.right,
+    height = 900 - margin.top - margin.bottom;
   var svg = d3.select('#network_svg');
   svg = svg.append('g').attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -35,17 +35,17 @@ function drawNetworkPlot(netData) {
   }
   var color = d3.scaleOrdinal().domain(type).range(d3.schemeSet2);
 
-  var tooltip = d3.select("#question_4_div")
-      .append("div")
-      .style("opacity", 0)
-      .attr("class", "NetworkTooltip")
-      .style("background-color", "white")
-      .style("color", "black")
-      .style("border", "solid")
-      .style("border-width", "2px")
-      .style("border-radius", "5px")
-      .style("padding", "5px")
-      .style("position", "absolute");
+  // var tooltip = d3.select("#question_4_div")
+  //     .append("div")
+  //     .style("opacity", 0)
+  //     .attr("class", "NetworkTooltip")
+  //     .style("background-color", "white")
+  //     .style("color", "black")
+  //     .style("border", "solid")
+  //     .style("border-width", "2px")
+  //     .style("border-radius", "5px")
+  //     .style("padding", "5px")
+  //     .style("position", "absolute");
 
   // Initialize the links
   link = svg
@@ -59,32 +59,24 @@ function drawNetworkPlot(netData) {
 
   // Initialize the nodes
   node = svg
-    .selectAll("circle")
+    .selectAll(".network_nodes")
     .data(netData.nodes)
     .enter()
     .append('image')
     .attr("xlink:href", d => image_ref[d.group])
     .attr("width", 25)
     .attr("height", 25)
-    // .attr("r", 20)
+    .attr("class", "network_nodes")
     .attr("id", d => "a" + d.id)
+    .attr("stroke", "black")
     .on("mouseover", function (d, i) {
-      // tooltip.style("opacity", 1);
       var id = d.target.id;
       highlightBasedOnNodeId(id);
     })
     .on("mouseout", function (d, i) {
-      // tooltip.html("").style("opacity", 0);
       var id = d.target.id;
       highlightBasedOnNodeId(id, true);
     })
-    // .on("mousemove", function (event, d) {
-    //   var tooltipText = `Location: \n ${d.name}`;
-    //   if(d.group>0) tooltipText = `Employee: \n ${d.firstname} ${d.lastname}`;
-    //   tooltip.html(tooltipText)
-    //     .style("left", event.clientX + window.scrollX + 20 + "px")
-    //     .style("top", event.clientY + window.scrollY - 20 + "px");
-    // });
 
     node_text = svg
     .selectAll(".nodeTexts")
@@ -113,10 +105,11 @@ function drawNetworkPlot(netData) {
     .append('image')
     .attr("xlink:href", d => image_ref[d])
     .attr("id", d => "g"+d)
-    .attr("x", width - 130)
-    .attr("y", (_, i) => height - 130 + i * 35)
+    .attr("x", width - 10)
+    .attr("y", (_, i) => height - 70 + i * 35)
     .attr("width", 25)
     .attr("height", 25)
+    .attr("border", "5px solid #555")
     .on("mouseover", function (d, i) {
       var id = this.id;
       highlightBasedOnGroupId(id);
@@ -135,8 +128,8 @@ function drawNetworkPlot(netData) {
     .append('text')
     .text(d => d)
     .attr("id", (_, i) => "g"+i)
-    .attr("x", width - 80)
-    .attr("y", (_, i) => height - 112 + i * 35)
+    .attr("x", width + 20)
+    .attr("y", (_, i) => height - 52 + i * 35)
     .attr("width", 25)
     .attr("height", 25)
     .on("mouseover", function (d, i) {
