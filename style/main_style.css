@@ -111,13 +111,13 @@ body {
 
 
 #left-shanky-div {
-    width: 20%;
+    width: 18%;
     /* height: 800px; */
     /* overflow-y: scroll; */
     float: left;
     background-color: var( --bg-color);
     border-width: 0px;
-    
+    margin-left: 10px;
 }
 
 #right-scroll-div {
