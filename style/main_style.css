@@ -59,18 +59,6 @@ body {
     float: left;
 }
 
-
-
-
-
-#network_svg {
-    width: 100%;
-    height: 1000px;
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-}
-
 /* #sanky_div {
     width: 50%;
     height: 800px;
@@ -195,10 +183,22 @@ body {
 
 
 #network_div {
-    width: 100%;
+    width: 98%;
     height: 1000px;
-    background-color: violet;
+    background-color: white;
+    padding: 2%;
+    margin-left: 1%;
+    margin-bottom: 4%;
+}
 
+
+#network_svg {
+    width: 98%;
+    height: 960px;
+    background-color: white;
+    /* border: 1px solid lightgray; */
+    border-radius: 3px;
+   
 }
 
 #location_label {
