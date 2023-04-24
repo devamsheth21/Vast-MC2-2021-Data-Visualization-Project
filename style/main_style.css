@@ -48,7 +48,7 @@ body {
 }
 
 #shankey_svg {
-    /* width: 40%; */
+    width: 100%;
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 3px;
@@ -64,7 +64,7 @@ body {
 
 
 #left-shanky-div {
-    width: 18%;
+    width: 19%;
     /* height: 800px; */
     /* overflow-y: scroll; */
     float: left;
