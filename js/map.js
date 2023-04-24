@@ -5,7 +5,7 @@ var kronos;
 var svg_map;
 var abilaProjection;
 var mapmargin = { top: 20, right: 20, bottom: 40, left: 40 },
-    mapwidth = 980 - mapmargin.left - mapmargin.right,
+    mapwidth = 900 - mapmargin.left - mapmargin.right,
     mapheight = 610 - mapmargin.top - mapmargin.bottom;
 
 var gpsData;

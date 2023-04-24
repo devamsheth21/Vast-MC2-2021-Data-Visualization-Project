@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .attr("height", function (d) { return (y(d[1].q1) - y(d[1].q3)) })
       .attr("width", boxWidth)
       .attr("stroke", "black")
-      .style("fill", "#69b3a2")
+      .style("fill", "rgb(17, 172, 172)")
 
     // Show the median
     svg

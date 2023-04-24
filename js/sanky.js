@@ -23,8 +23,8 @@ function selectLinkByCcNum(cc_num) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-	var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-		width = 270 - margin.left - margin.right,
+	var margin = { top: 10, right: 20, bottom: 10, left: 10 },
+		width = 260 - margin.left - margin.right,
 		height = 2500 - margin.top - margin.bottom;
 
 	// format variables
