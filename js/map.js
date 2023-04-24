@@ -132,6 +132,20 @@ function plotGPS() {
 function addCars(carIds) {
     svg_cars = d3.select('#map_cars');
 
+
+    svg_cars.selectAll('.outerRect')
+    .data(carIds)
+    .join('rect')
+    .attr('id', d => "car_"+d)
+    .attr('class', 'outerRect')
+    .attr('x', 40)
+    .attr('y', (d, i) => (i + 1) * 25)
+    .attr('height', 20)
+    .attr('width', 200)
+    .style('opacity',0)
+    .attr('fill', 'red');
+
+
     svg_cars.selectAll('.cars')
         .data(carIds)
         .join('rect')
@@ -161,16 +175,19 @@ function addCars(carIds) {
         .join('text')
         .attr('class', 'carIds')
         .attr('x', 45)
+        // .attr('id', d => "car_"+d)
         .attr('y', (d, i) => (i + 1) * 25 + 15)
         .text(d => d)
         .on('click', (d, i) => {
             if (!selected_cars.includes(d.target.innerHTML)) {
                 selected_cars.push(d.target.innerHTML);
+                d3.selectAll("#car_"+d.target.innerHTML).style('opacity', 0.5);
             } else {
                 var index = selected_cars.indexOf(d.target.innerHTML);
                 if (index != -1) {
                     selected_cars.splice(index, 1);
                 }
+                d3.selectAll("#car_"+d.target.innerHTML).style('opacity', 0);
             }
             updateData(d.target.innerHTML);
             plotGPS();
@@ -182,15 +199,18 @@ function addCars(carIds) {
         .join('text')
         .attr('class', 'carOwners')
         .attr('x', 70)
+        // .attr('id', d => "car_"+d.CarID)
         .attr('y', (d, i) => (i + 1) * 25 + 15)
         .text(d => d.FirstName + ' ' + d.LastName)
         .on('click', (d, i) => {
             if (!selected_cars.includes(d.target.__data__.CarID)) {
                 selected_cars.push(d.target.__data__.CarID);
+                d3.selectAll("#car_"+d.target.__data__.CarID).style('opacity', 0.5);
             } else {
                 var index = selected_cars.indexOf(d.target.__data__.CarID);
                 if (index != -1) {
                     selected_cars.splice(index, 1);
+                    d3.selectAll("#car_"+d.target.__data__.CarID).style('opacity', 0);
                     //console.log(selected_cars);
                 }
             }
@@ -198,17 +218,21 @@ function addCars(carIds) {
             plotGPS();
 
         })
+
+        
+        
 }
 
 function updateData(car) {
     highlightInNetworkChartBasedOnSelection(car);
     // console.log(gdc[date.getDate()][1]);
     //console.log(gdc[date.getDate()][car]);
-    console.log(car);
     if (selected_cars.includes(car)) {
         plotData[car] = gdc[date.getDate()][car];
+        d3.selectAll("#car_"+car).style('opacity', 0.5);
     } else {
         delete plotData[car];
+        d3.selectAll("#car_"+car).style('opacity', 0);
     }
 
     //console.log(plotData);
