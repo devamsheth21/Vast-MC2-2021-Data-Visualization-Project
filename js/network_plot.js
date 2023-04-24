@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function drawNetworkPlot(netData) {
-  var margin = { top: 50, right: 30, bottom: 100, left: 100 },
+  var margin = { top: 10, right: 30, bottom: 100, left: 100 },
     width = 1200 - margin.left - margin.right,
     height = 1000 - margin.top - margin.bottom;
   var svg = d3.select('#network_svg');
@@ -154,7 +154,7 @@ function drawNetworkPlot(netData) {
       .id(function (d) { return d.id; })                     // This provide  the id of a node
       .links(netData.links)                                    // and this the list of links
     )
-    .force("charge", d3.forceManyBody().strength(-800))         // This adds repulsion between nodes. Play with the -400 for the repulsion strength
+    .force("charge", d3.forceManyBody().strength(-500))         // This adds repulsion between nodes. Play with the -400 for the repulsion strength
     .force("center", d3.forceCenter(width / 2, height / 2))     // This force attracts nodes to the center of the svg area
     .on("end", ticked);
 

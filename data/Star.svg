@@ -60,22 +60,22 @@
   >
   <g
       id="star"
-      style="fill:#b71234"
+      style="fill:#fb8072"
       transform="matrix(100.47 0 0 99.502 100 99.502)"
     >
     <g
         id="cone"
-        style="fill:#b71234"
+        style="fill:#fb8072"
       >
       <polygon
           id="triangle"
-          style="fill:#b71234"
+          style="fill:#fb8072"
           points="0 0 0 1 0.5 1"
           transform="matrix(.95106 .30902 -.30902 .95106 0 -1)"
       />
       <use
           id="use2189"
-          style="fill:#b71234"
+          style="fill:#fb8072"
           xlink:href="#triangle"
           transform="scale(-1,1)"
           height="600"
@@ -87,7 +87,7 @@
     >
     <use
         id="use2191"
-        style="fill:#b71234"
+        style="fill:#fb8072"
         xlink:href="#cone"
         transform="rotate(72.001)"
         height="600"
@@ -97,7 +97,7 @@
     />
     <use
         id="use2193"
-        style="fill:#b71234"
+        style="fill:#fb8072"
         xlink:href="#cone"
         transform="rotate(-72.001)"
         height="600"
@@ -107,7 +107,7 @@
     />
     <use
         id="use2195"
-        style="fill:#b71234"
+        style="fill:#fb8072"
         xlink:href="#cone"
         transform="rotate(144)"
         height="600"
@@ -117,7 +117,7 @@
     />
     <use
         id="use2197"
-        style="fill:#b71234"
+        style="fill:#fb8072"
         xlink:href="#cone"
         transform="rotate(216)"
         height="600"

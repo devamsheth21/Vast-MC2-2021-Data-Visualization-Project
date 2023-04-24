@@ -5,7 +5,7 @@
  height="999" width="999"
  xmlns="http://www.w3.org/2000/svg">
 <title>Regular Pentagon</title>
- <path fill="cyan" stroke="cyan" stroke-width="10"
+ <path fill="#8dd3c7" stroke="#8dd3c7" stroke-width="10"
    d="m754,0 L233,717.1
  -610,443.19 -610,-443.19
  233,-717.1 z" />
