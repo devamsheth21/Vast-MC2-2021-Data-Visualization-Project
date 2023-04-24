@@ -153,7 +153,7 @@ function DrawChart() {
   minRadius = 50;
 
 
-  var tooltipring = d3.select("#question_1_div")
+  var tooltipring = d3.select("#right-ring-div")
   .append("div")
   .style("opacity", 0)
   .attr("class", "tooltipring")
@@ -233,12 +233,14 @@ function DrawChart() {
     .style("opacity", 1)
     .on("mouseover", function (_, d) {
       tooltipring.style("opacity", 1);
+      time.style("opacity", 0.3);
       d3.select(this).style("opacity", 1);
       d3.select(this).style("stroke", border_color);
     })
     .on("mouseout", function (_, d) {
+      time.style("opacity", 1)
       tooltipring.html("").style("opacity", 0);
-      d3.select(this).style("opacity", 0.7);
+      d3.select(this).style("opacity", 1);
       d3.select(this).style("stroke", "none");
     })
     .on("mousemove", function (event, d) {
