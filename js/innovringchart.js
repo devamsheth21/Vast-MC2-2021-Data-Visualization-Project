@@ -244,7 +244,7 @@ function DrawChart() {
     })
     .on("mousemove", function (event, d) {
       d3.select(this).style("opacity", 1);
-      tooltipring.html('Spending: ' + d.price + '<br>' + 'Location: ' + d.location + '<br>' + 'Time: '+ d.time + '<br>' +"Date: "+ d.date)
+      tooltipring.html("cc : " + d.last4ccnum+ '<br>' + 'Spending: ' + d.price + '<br>' + 'Location: ' + d.location + '<br>' + 'Time: '+ d.time + '<br>' +"Date: "+ d.date)
         .style("left", event.clientX + window.scrollX + 20 + "px")
         .style("top", event.clientY + window.scrollY - 20 + "px");
     });
