@@ -94,12 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 function UpdateData(selected_location, selected_cc) {
+  var currentloc
   d3.selectAll(".box_circles").style("opacity", 0.1);
   if (selected_location == 1) {
     d3.selectAll(".box_circles").style("opacity", 1);
+    d3.selectAll('.cc_bars').style('stroke-width',1);
   }
+
   else {
     d3.selectAll('#box_' + location_index[selected_location]).style("opacity", 1);
+    d3.selectAll('.cc_bars').style('stroke-width',1);
+    d3.select("#bar_"+location_index[selected_location] ).style("stroke-width",4);
   }
   var allcc = (selected_cc == '1');
   var alloc = (selected_location == '1');
@@ -143,8 +148,21 @@ function timetoangle(time) {
 function DrawChart() {
   parsedate = d3.timeParse("%Y-%m-%d");
   parseTime = d3.timeParse("%H:%M:%S");
-  maxRadius = (Math.min(inwidth, inringheight)) / 2 - 50;
+  maxRadius = (Math.min(inwidth, inringheight)) / 2 - 30;
   minRadius = 50;
+
+
+  var tooltipring = d3.select("#question_1_div")
+  .append("div")
+  .style("opacity", 0)
+  .attr("class", "tooltipring")
+  .style("background-color", "white")
+  .style("color", "black")
+  .style("border", "solid")
+  .style("border-width", "2px")
+  .style("border-radius", "5px")
+  .style("padding", "5px")
+  .style("position", "absolute");
 
   dateToRadius = d3.scaleTime()
     .domain(d3.extent(ringdata, d => parsedate(d.date)))
@@ -207,19 +225,26 @@ function DrawChart() {
     .attr("class", "transactions")
     .attr("cx", function (d) { return inwidth / 2 + dateToRadius(parsedate(d.date)) * Math.cos(timetoangle(d.time)); })
     .attr("cy", function (d) { return inringheight / 2 + dateToRadius(parsedate(d.date)) * Math.sin(timetoangle(d.time)); })
-    .attr("r", 3)
+    .attr("r", 4.5)
     .attr("id", d => "c" + d.last4ccnum + '_t' + d.time + '_d' + d.date + '_l' + d.location + "_ty" + loctype[d.location])
     .attr("fill", d => colorMap[loctype[d.location]])
     .style("visibility", "visible")
-    .style("opacity", 1);
-
-  time.append("svg:title")
-    .text(function (d) {
-      return "Locationr: " + d.location +
-        "\nTime: " + d.time + " time\n" +
-        "Date: " + d.date + " date\n" +
-        "\nPrice :" + d.price +
-        "\n CCnum : " + d.last4ccnum;
+    .style("opacity", 1)
+    .on("mouseover", function (_, d) {
+      tooltipring.style("opacity", 1);
+      d3.select(this).style("opacity", 1);
+      d3.select(this).style("stroke", "white");
+    })
+    .on("mouseout", function (_, d) {
+      tooltipring.html("").style("opacity", 0);
+      d3.select(this).style("opacity", 0.7);
+      d3.select(this).style("stroke", "none");
+    })
+    .on("mousemove", function (event, d) {
+      d3.select(this).style("opacity", 1);
+      tooltipring.html('Spending: ' + d.price + '<br>' + 'Location: ' + d.location + '<br>' + 'Time: '+ d.time + '<br>' +"Date: "+ d.date)
+        .style("left", event.clientX + window.scrollX + 20 + "px")
+        .style("top", event.clientY + window.scrollY - 20 + "px");
     });
 
 
@@ -249,14 +274,30 @@ function legends() {
 
   const legendWidth = 150;
   const legendHeight = 20 * 4; // height of each item in legend is 20
-  const legendr = ringsvg
+  var legendr = ringsvg
     .append("g")
     .attr("class", "legend")
     .attr("width", legendWidth)
     .attr("height", legendHeight)
     .attr("transform", 'translate(583,0)');
+   
+    legendr.append("rect")
+    .attr("x", -2)
+    .attr("y", 0)
+    .attr("width", 215)
+    .attr("height", 114)
+    .style("fill", "#f7f7f7");
 
-  legendr.selectAll("rect")
+    legendr.append("text")
+    .attr("x", 100)
+    .attr("y", 13)
+    .attr("text-anchor", "middle")
+    .attr('fill', "black")
+    .attr("font-weight",650)
+    .attr("font-family","Arial")
+    .text("Select Categrories");
+  var clickedty = null
+  var rectty = legendr.selectAll("legrect")
     .data(Object.keys(colorMap))
     .enter()
     .append("rect")
@@ -265,9 +306,27 @@ function legends() {
     .attr("width", 13)
     .attr("height", 13)
     .style("fill", d => colorMap[d])
-    .on('click', (d, i) => Updatering(i, "ty" + i));
+    .style("stroke", "black")
+    .on('click', function(d,i) {
+    // (d, i) => Updatering(i, "ty" + i));
+    // console.log(i)
+    if (clickedty == i) {
+      rectty.style("stroke", "black");
+      d3.selectAll(".transactions")
+        .style("visibility", "visible")
+        .style("stroke", "none")
+      clickedty = null;
+    }
+    else {
+      rectty.style("stroke", "black")
+      d3.select(this).style("stroke", "white")
+      clickedty = i;
+      Updatering(i, "ty" + i);
 
-  legendr.selectAll("text")
+    }
+  });
+
+  legendr.selectAll(".legtext")
     .data(Object.keys(colorMap))
     .enter()
     .append("text")
@@ -319,7 +378,7 @@ function calend() {
     .style("fill", "lightgreen")
     .style("stroke", "black")
     .on("click", function (d, i) {
-      // Call your update chart function with the selected date
+      // Call  update chart function with the selected date
       if (clickedcal == i) {
         squares.style("stroke", "black");
         d3.selectAll(".transactions")
