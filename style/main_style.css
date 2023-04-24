@@ -118,10 +118,9 @@ body {
     background-color: white;
     position:relative; 
     top:-12px;
-    left:-11px
-    /* border: 1px solid lightgray; */
-    /* border-radius: 3px; */
-    /* float: right; */
+    left:-11px;
+    padding-top: 5px;
+
 }
 
 #map_div {
@@ -189,6 +188,7 @@ body {
     padding: 2%;
     margin-left: 1%;
     margin-bottom: 4%;
+    margin-top: 2%;
 }
 
 
@@ -224,6 +224,7 @@ body {
 
 #panel {
     margin: 5px;
+    padding-top: 5px;
 }
 
 @font-face {
@@ -266,3 +267,24 @@ body {
     
     margin-bottom: 10px;
 }   
+
+table{
+    padding: 4%;
+    /* margin-top:1000px; */
+    border-radius: 10px;
+}
+
+#more_info{
+    margin-left: 10%;
+    margin-bottom: 5%;
+    padding: 10%;
+}
+
+tr{
+    border-radius: 10px;
+    background-color: white;
+}
+
+tbody{
+    border-radius: 10px;
+}

@@ -20,15 +20,130 @@
 
 <body>
     <div class="myContainer">
-        <h2 id="project_title" class="text-center" style="font-family: Voltaire-Frangela;">Project CSE 578 Spring 2023</h2>
-        <h3 id="project_team_names" class="text-center">Devam Seth &ensp; Manan Gandhi &ensp; Niketan Chandarana &ensp; Nihar Thakkar &ensp; Tirth Hihoriya</h3>
+        <h2 id="project_title" class="text-center" style="font-family: Voltaire-Frangela;">Project CSE 578 Spring 2023
+        </h2>
+        <h3 id="project_team_names" class="text-center">Devam Seth &ensp; Manan Gandhi &ensp; Niketan Chandarana &ensp;
+            Nihar Thakkar &ensp; Tirth Hihoriya</h3>
         <hr>
 
         <div class="row">
 
             <!-- shanky div -->
-            <div class="" id="left-shanky-div">
+            <div class="col-md-2" id="left-shanky-div">
                 <svg id="shankey_svg" class="border rounded-4 shadow"></svg>
+
+                <!-- table -->
+                
+                <span id="more_info"> One-to-One Mapping </span>
+                <div class="table_div">
+                    <table class="table table-bordered table-hover table-condensed border rounded-4 shadow">
+                        <thead>
+                            <tr>
+                                <th title="Field #1">cc_num</th>
+                                <th title="Field #2">loyalty_num</th>
+                                <th title="Field #3">frequency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>6816</td>
+                                <td>L8148</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>9617</td>
+                                <td>L5553</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>7384</td>
+                                <td>L3800</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>8129</td>
+                                <td>L8328</td>
+                                <td>21</td>
+                            </tr>
+                            <tr>
+                                <td>9551</td>
+                                <td>L5777</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>4434</td>
+                                <td>L2169</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>6899</td>
+                                <td>L6267</td>
+                                <td>23</td>
+                            </tr>
+                            <tr>
+                                <td>1877</td>
+                                <td>L3014</td>
+                                <td>18</td>
+                            </tr>
+                            <tr>
+                                <td>9241</td>
+                                <td>L3288</td>
+                                <td>13</td>
+                            </tr>
+                            <tr>
+                                <td>2463</td>
+                                <td>L6886</td>
+                                <td>23</td>
+                            </tr>
+                            <tr>
+                                <td>1310</td>
+                                <td>L8012</td>
+                                <td>21</td>
+                            </tr>
+                            <tr>
+                                <td>9405</td>
+                                <td>L3259</td>
+                                <td>21</td>
+                            </tr>
+                            <tr>
+                                <td>7117</td>
+                                <td>L6417</td>
+                                <td>28</td>
+                            </tr>
+                            <tr>
+                                <td>3506</td>
+                                <td>L7761</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>8156</td>
+                                <td>L5224</td>
+                                <td>22</td>
+                            </tr>
+                            <tr>
+                                <td>2276</td>
+                                <td>L3317</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>9152</td>
+                                <td>L5485</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>3547</td>
+                                <td>L9362</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>5010</td>
+                                <td>L2459</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
 
@@ -47,16 +162,19 @@
                             <div class="col-md-2 border rounded-4 shadow" id="right-ring-div">
                                 <div id="panel">
                                     <label id="location_label" style="position:relative; top:-9px">Location:</label>
-                                    <div class="dropdowns" id="ring-drop" style="text-align: center;position:relative; top:-12px">
+                                    <div class="dropdowns" id="ring-drop"
+                                        style="text-align: center;position:relative; top:-12px">
                                         <select class="form-select" id="dropdownloc">
                                             <option value=1> All</option>
                                         </select>
                                     </div>
 
                                     <label id="cc_label"
-                                        style="float: left; margin-right: 0px; text-align: center;position:relative; top:-9px">Credit Card #:
+                                        style="float: left; margin-right: 0px; text-align: center;position:relative; top:-9px">Credit
+                                        Card #:
                                     </label>
-                                    <div class="dropdowns" style="width: 150px; float: left; margin-left: 10px;position:relative; top:-12px">
+                                    <div class="dropdowns"
+                                        style="width: 150px; float: left; margin-left: 10px;position:relative; top:-12px">
 
                                         <select class="form-select" id="dropdowncc">
                                             <option value=1> All</option>
@@ -76,9 +194,9 @@
 
                             <div class="col">
                                 <div class="row-m-3" id="dd">
-                                    &nbsp;&nbsp;&nbsp; Date: 
-                                    <input class="date" type="date" id="date" min="2014-01-06" max="2014-01-19" value="2014-01-06"
-                                        onchange="dateOnChange(this)">
+                                    &nbsp;&nbsp;&nbsp; Date:
+                                    <input class="date" type="date" id="date" min="2014-01-06" max="2014-01-19"
+                                        value="2014-01-06" onchange="dateOnChange(this)">
                                 </div>
                                 <div class="row-m-3">
                                     <div id="map_car_div">
