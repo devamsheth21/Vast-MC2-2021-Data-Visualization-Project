@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		link.append("title")
 			.text(function (d) {
 				return d.source.name + " → " +
-					d.target.name + "\n" + format(d.value);
+					d.target.name + "\n" +"Number of transactions:- "+ format(d.value);
 			});
 
 
@@ -124,7 +124,15 @@ document.addEventListener('DOMContentLoaded', function () {
 			.attr('stroke-width', 0)
 			.append("title")
 			.text(function (d) {
-				return d.name + "\n" + format(d.value);
+				if(d.name.length < 4){
+					return "Car Number:- "+d.name + "\n" +"Total Number of transactions:- "+ format(d.value);
+				}
+				else if(d.name.length == 4){
+					return "Credit Card Number:- "+d.name + "\n" +"Total Number of transactions:- "+ format(d.value);
+				}
+				else{
+					return "Loyalty Card Number:- "+d.name + "\n" +"Total Number of transactions:- "+ format(d.value);
+				}
 			});
 
 		node.on("mouseover", function (d) {
