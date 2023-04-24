@@ -33,11 +33,14 @@ var xScale;
 var drag;
 
 document.addEventListener('DOMContentLoaded', function () {
-    Promise.all([d3.json('data/abila.geojson'), d3.csv('data/gps.csv'), d3.csv('data/car-assignments.csv'), d3.json('data/day_car_gps_mapping.json')]).then(function (values) {
+    Promise.all([d3.json('data/abila.geojson'), d3.csv('data/gps.csv'), d3.csv('data/car-assignments.csv'), d3.json('data/day_car_gps_mapping.json'),
+                    d3.json('preprocessing_scripts/house_coordinates.json')]).then(function (values) {
         abila = values[0];
         gpsData = values[1];
         carOwners = values[2];
         gdc = values[3];
+        homes = values[4];
+        console.log(Object.entries(homes));
         //console.log(gdc);
         // console.log(gpsData[1].Timestamp);
         // console.log(carIds);
@@ -95,6 +98,19 @@ function plotAbila() {
         .attr('stroke-width', 3)
         .style('font-size', '15px')
         .call(xAxis);
+
+    svg_map.selectAll('.houses')
+            .data(Object.entries(homes))
+            .join('rect')
+            .attr('class', 'houses')
+            .attr('x', d => abilaProjection([+d[1]['range'][0][0], +d[1]['range'][0][1]])[0])
+            .attr('y', d => abilaProjection([+d[1]['range'][0][0], +d[1]['range'][0][1]])[1])
+            .attr('height', 20)
+            .attr('width', 20)
+            .style('opacity',0.5)
+            .attr('fill', 'black')
+            .append('title')
+            .text(d => d[1]['name'])
 }
 
 function plotGPS() {
