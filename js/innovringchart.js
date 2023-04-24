@@ -368,7 +368,7 @@ function calend() {
     .attr("y", function (d, i) { return Math.floor(i / 4) * (gridSize + padding)+10; })
     .attr("width", gridSize)
     .attr("height", gridSize)
-    .style("fill", "lightgreen")
+    .style("fill", "#d9f0d3")
     .style("stroke", "black")
     .on("click", function (d, i) {
       // Call  update chart function with the selected date
