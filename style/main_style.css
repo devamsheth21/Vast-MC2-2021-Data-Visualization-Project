@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #e9eff1;
+    --bg-color: rgb(235, 244, 244);
     --white: #faf0e6;
 }
 
@@ -285,10 +285,16 @@ tbody{
     border-radius: 10px;
 }
 
+<<<<<<< Updated upstream
 td{
     text-align: center
 }
 
 th{
     background-color: #2f8332;
+=======
+h6{
+    padding-left:30px;
+    padding-right:30px;
+>>>>>>> Stashed changes
 }
