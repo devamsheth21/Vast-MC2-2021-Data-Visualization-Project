@@ -9,6 +9,7 @@ var timelabelangles;
 var timelabel;
 var time;
 
+var border_color = '#e9eff1';
 
 // var colorMap = {
 //     "Travel and Accommodation": "#FFC107",
@@ -72,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
   })]).then(function (values) {
     ringdata = values[0];
 
-    ringwidth = 770;
-    ringheight = 770;
+    ringwidth = 750;
+    ringheight = 750;
     ringsvg = d3.select("#ring_svg")
     // .append("svg")
     // .attr("width", ringwidth)
@@ -131,13 +132,13 @@ function Updatering(d, i) {
 
   if (i == 'dALL') {
     ringsvg.selectAll(".transactions")
-      .style('stroke', 'white')
+      .style('stroke', border_color)
       .style('stroke-width', 0.5)
       .style("visibility", "visible");
   }
   else {
     d3.selectAll('[id*="' + i + '"]')
-      .style('stroke', 'white')
+      .style('stroke', border_color)
       .style('stroke-width', 0.5)
       .style("visibility", "visible");
   }
@@ -156,7 +157,7 @@ function DrawChart() {
   .append("div")
   .style("opacity", 0)
   .attr("class", "tooltipring")
-  .style("background-color", "white")
+  .style("background-color", border_color)
   .style("color", "black")
   .style("border", "solid")
   .style("border-width", "2px")
@@ -225,7 +226,7 @@ function DrawChart() {
     .attr("class", "transactions")
     .attr("cx", function (d) { return inwidth / 2 + dateToRadius(parsedate(d.date)) * Math.cos(timetoangle(d.time)); })
     .attr("cy", function (d) { return inringheight / 2 + dateToRadius(parsedate(d.date)) * Math.sin(timetoangle(d.time)); })
-    .attr("r", 4.5)
+    .attr("r", 3.5)
     .attr("id", d => "c" + d.last4ccnum + '_t' + d.time + '_d' + d.date + '_l' + d.location + "_ty" + loctype[d.location])
     .attr("fill", d => colorMap[loctype[d.location]])
     .style("visibility", "visible")
@@ -233,7 +234,7 @@ function DrawChart() {
     .on("mouseover", function (_, d) {
       tooltipring.style("opacity", 1);
       d3.select(this).style("opacity", 1);
-      d3.select(this).style("stroke", "white");
+      d3.select(this).style("stroke", border_color);
     })
     .on("mouseout", function (_, d) {
       tooltipring.html("").style("opacity", 0);
@@ -281,21 +282,7 @@ function legends() {
     .attr("height", legendHeight)
     .attr("transform", 'translate(583,0)');
    
-    legendr.append("rect")
-    .attr("x", -2)
-    .attr("y", 0)
-    .attr("width", 215)
-    .attr("height", 114)
-    .style("fill", "#f7f7f7");
 
-    legendr.append("text")
-    .attr("x", 100)
-    .attr("y", 13)
-    .attr("text-anchor", "middle")
-    .attr('fill', "black")
-    .attr("font-weight",650)
-    .attr("font-family","Arial")
-    .text("Select Categrories");
   var clickedty = null
   var rectty = legendr.selectAll("legrect")
     .data(Object.keys(colorMap))
@@ -319,7 +306,7 @@ function legends() {
     }
     else {
       rectty.style("stroke", "black")
-      d3.select(this).style("stroke", "white")
+      d3.select(this).style("stroke", border_color)
       clickedty = i;
       Updatering(i, "ty" + i);
 
@@ -351,13 +338,6 @@ function calend() {
   var gridSize = 22,
     padding = 5;
   uniquedates.add('ALL')
-
-  cal.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", 120)
-    .attr("height", 138)
-    .style("fill", "#f7f7f7");
 
   cal.append("text")
     .attr("x", 60)
