@@ -24,8 +24,8 @@ function selectLinkByCcNum(cc_num) {
 
 document.addEventListener('DOMContentLoaded', function () {
 	var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-		width = 300 - margin.left - margin.right,
-		height = 2000 - margin.top - margin.bottom;
+		width = 290 - margin.left - margin.right,
+		height = 2500 - margin.top - margin.bottom;
 
 	// format variables
 	var formatNumber = d3.format(",.0f"), // zero decimal places
