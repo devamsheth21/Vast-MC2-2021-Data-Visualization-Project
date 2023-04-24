@@ -289,10 +289,12 @@ function legends() {
     .attr("y", 3)
     .attr("text-anchor", "middle")
     .attr('fill', "black")
-    .attr("font-weight",620)
+    .attr("font-weight",320)
     .attr("font-family","Serif")
     .text("Select Categrories")
+    .style("font-size", '12px');
 
+    
   var clickedty = null
   var rectty = legendr.selectAll("legrect")
     .data(Object.keys(colorMap))
