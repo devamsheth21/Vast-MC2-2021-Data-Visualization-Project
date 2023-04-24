@@ -1,6 +1,6 @@
 // This is completed code of 5th plot - box plot
-var margin_box = { top: 10, right: 30, bottom: 130, left: 70 },
-  width_box = 1060 - margin_box.left - margin_box.right,
+var margin_box = { top: 50, right: 30, bottom: 130, left: 70 },
+  width_box = 1160 - margin_box.left - margin_box.right,
   height_box = 900 - margin_box.top - margin_box.bottom;
 
 var data
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .append("line")
       .attr("x1", function (d) { return (x(d[0])) })
       .attr("x2", function (d) { return (x(d[0])) })
-      .attr("y1", function (d) {//console.log(d[1]);
+      .attr("y1", function (d) {
         return (y(d[1].min))
       })
       .attr("y2", function (d) { return (y(d[1].max)) })
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .style("width", 40)
 
     // rectangle for the main box
-    var boxWidth = 22
+    var boxWidth = 28
     svg
       .selectAll("boxes")
       .data(sumstat)
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .attr("x", width_box / 2)
       .attr("y", height_box + 110)
       .text("Locations")
-      .style("font-size", "15px");
+      .style("font-size", "18px");
 
 
     svg.append("text")
@@ -153,7 +153,8 @@ document.addEventListener('DOMContentLoaded', function () {
       .attr("x", -(height_box / 2))
       .attr("dy", "0.3em")
       .style("text-anchor", "middle")
-      .text("Price").style("font-size", "15px");
+      .text("Price")
+      .style("font-size", "18px");
 
 
     var jitterWidth = 20

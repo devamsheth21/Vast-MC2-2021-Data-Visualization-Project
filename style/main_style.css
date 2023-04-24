@@ -1,10 +1,10 @@
 :root {
     --bg-color: #e9eff1;
     --white: #faf0e6;
-  }
+}
 
 body {
-    background-color: var( --bg-color);
+    background-color: var(--bg-color);
 }
 
 .myContainer {
@@ -59,40 +59,9 @@ body {
     float: left;
 }
 
-#box_plot_svg {
-    width: 50%;
-    height: 1000px;
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    float: right;
-}
 
-#map_div {
-    width: 350px;
-    height: 800px;
-    overflow-y: scroll;
-}
 
-#map_svg {
-    width: 1200px;
-    height: 800px;
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    display: block;
-    float: left;
-}
 
-#map_cars {
-    width: 300px;
-    height: 1050px;
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    display: block;
-    float: right;
-}
 
 #network_svg {
     width: 100%;
@@ -115,7 +84,7 @@ body {
     /* height: 800px; */
     /* overflow-y: scroll; */
     float: left;
-    background-color: var( --bg-color);
+    background-color: var(--bg-color);
     border-width: 0px;
     margin-left: 10px;
 }
@@ -125,15 +94,15 @@ body {
     height: 800px;
     /* overflow-y: scroll; */
     float: right;
-    background-color: var( --bg-color);
+    background-color: var(--bg-color);
 }
 
 #left-circular-div {
-    width: 45%;
+    width: 47%;
     height: 700px;
     /* overflow-y: scroll; */
     float: left;
-    background-color: var( --bg-color);
+    background-color: var(--bg-color);
 }
 
 #circular_bar_svg {
@@ -166,11 +135,61 @@ body {
 
 #map_div {
     width: 100%;
-    height: 800px;
+    height: 700px;
     /* overflow-y: scroll; */
-    background-color: black;
+    background-color: white;
+    padding: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#map_car_div{
+    width: 250px;
+    height: 520px;
+    float: right;
+    overflow-y: scroll;
+    display:block;
+    margin-bottom: 20px;
+}
+
+#map_svg {
+    margin-top: 20px;
+    width: 940px;
+    height: 600px;
+    background-color: white;
+    display: block;
+    float: left;
+}
+
+
+
+#map_cars {
+    width: 250px;
+    height: 1100px;
+    background-color: white;
+    display: block;
+    float: right;
+    overflow-y: scroll;
+    background-color: #f0f6f0;
 
 }
+
+#box_plot_div{
+    width: 98%;
+    height: 900px;
+    background-color: white;
+    margin: 10px;
+    padding: 8px;
+    
+
+}
+#box_plot_svg {
+    width: 100%;
+    height: 880px;
+    background-color: white;
+    
+}
+
 
 #network_div {
     width: 100%;
@@ -187,20 +206,60 @@ body {
 
 #ring-drop {
     width: 220px;
-    height:20px;
+    height: 20px;
     float: left;
     margin-right: 20px;
 }
 
-#dropdownloc{
-    height:30px;
+#dropdownloc {
+    height: 30px;
 }
 
-#dropdowncc{
-    height:30px;
+#dropdowncc {
+    height: 30px;
 }
 
-#panel{
+#panel {
     margin: 5px;
 }
 
+@font-face {
+    font-family: "Voltaire-Frangela";
+    src: url("./../font/Voltaire-Frangela.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "bariol";
+    src: url("./../font/bariol_regular-webfont.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Andiela-Sathony";
+    src: url("./../font/Andiela-Sathony.ttf") format("truetype");
+}
+
+#project_title{
+    font-family: Voltaire-Frangela;
+}
+
+#project_team_names{
+    font-family: Andiela-Sathony;
+}
+
+#play{
+    width:200px;
+    background-color: #9fb7a0;
+    border: none;
+    margin-left: 30px;
+}
+
+.date{
+    width:150px;
+    margin-left: 5px;
+
+}
+
+#dd{
+    
+    margin-bottom: 10px;
+}   

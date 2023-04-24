@@ -20,30 +20,31 @@
 
 <body>
     <div class="myContainer">
-        <h1 class="text-center">Project - CSE 578 - Spring 2023</h1>
+        <h2 id="project_title" class="text-center" style="font-family: Voltaire-Frangela;">Project CSE 578 Spring 2023</h2>
+        <h3 id="project_team_names" class="text-center">Devam Seth &ensp; Manan Gandhi &ensp; Niketan Chandarana &ensp; Nihar Thakkar &ensp; Tirth Hihoriya</h3>
         <hr>
 
         <div class="row">
 
             <!-- shanky div -->
             <div class="" id="left-shanky-div">
-                <svg id="shankey_svg" class="border rounded-4 shadow "></svg>
+                <svg id="shankey_svg" class="border rounded-4 shadow"></svg>
             </div>
 
 
             <div class="col-md-2" id="right-scroll-div">
                 <div class="col">
                     <!-- circular  and  ring both -->
-                    <div class="row-m-3" id="circular_and_ring_both">
+                    <div class="row-m-4" id="circular_and_ring_both">
                         <div class="row">
 
                             <!-- circular-bar-plot div -->
                             <div class="col-m-2" id="left-circular-div">
-                                <svg id="circular_bar_svg" class="border rounded-4 shadow "></svg>
+                                <svg id="circular_bar_svg" class="border rounded-4 shadow"></svg>
                             </div>
 
                             <!-- ring chart -->
-                            <div class="col-md-2 border rounded-4 shadow" id="right-ring-div" >
+                            <div class="col-md-2 border rounded-4 shadow" id="right-ring-div">
                                 <div id="panel">
                                     <label id="location_label">Location:</label>
                                     <div class="dropdowns" id="ring-drop">
@@ -51,33 +52,54 @@
                                             <option value=1> All</option>
                                         </select>
                                     </div>
-                
-                                    <label id="cc_label" style="float: left; margin-right: 0px; text-align: center;">Credit Card #: </label>
+
+                                    <label id="cc_label"
+                                        style="float: left; margin-right: 0px; text-align: center;">Credit Card #:
+                                    </label>
                                     <div class="dropdowns" style="width: 150px; float: left; margin-left: 10px;">
-                                        
+
                                         <select class="form-select" id="dropdowncc">
                                             <option value=1> All</option>
                                         </select>
                                     </div>
-                                 </div>
+                                </div>
 
-                                <svg id="ring_svg" ></svg> <!-- ring svg -->
+                                <svg id="ring_svg"></svg> <!-- ring svg -->
                             </div>
                         </div>
 
+
                         <!-- map chart -->
-                        <div class="row-m-3" id="map_div">
-                            <input type="date" id="date" min="2014-01-06" max="2014-01-19" value="2014-01-06"
-                                onchange="dateOnChange(this)">
+                        <div class="row-m-4 border rounded-4 shadow" id="map_div">
+
                             <svg id="map_svg"></svg>
-                            <div id="map_div">
-                                <svg id="map_cars"></svg>
+
+                            <div class="col">
+                                <div class="row-m-3" id="dd">
+                                    &nbsp;&nbsp;&nbsp; Date: 
+                                    <input class="date" type="date" id="date" min="2014-01-06" max="2014-01-19" value="2014-01-06"
+                                        onchange="dateOnChange(this)">
+                                </div>
+                                <div class="row-m-3">
+                                    <div id="map_car_div">
+                                        <svg id="map_cars" class="border rounded-4 shadow"></svg>
+                                    </div>
+                                </div>
+                                <div class="row-m-3">
+                                    <button type="button" class="btn btn-info" id="play">Play</button>
+                                </div>
                             </div>
-                            <button type="button" id="play">Play</button>
+
+
+                        </div>
+
+                        <!-- box-plot -->
+                        <div class="row-m-4 border rounded-4 shadow" id="box_plot_div">
+                            <svg id="box_plot_svg"></svg>
                         </div>
 
                         <!-- network chart -->
-                        <div class="row-m-3" id="network_div">
+                        <div class="row-m-4 border rounded-4 shadow" id="network_div">
                             <svg id="network_svg"></svg>
                         </div>
 
