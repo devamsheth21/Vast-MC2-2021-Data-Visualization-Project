@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 
 		node.on("mouseover", function (d) {
+			// console.log(d);
 			var id = d.target.getAttribute("nodeId");
 			// Set the opacity of all links to a lower value
 			link.style("opacity", 0.1);
@@ -173,22 +174,41 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	  	  
 	  node.on("click",function(d){
-		console.log(d.srcElement.__data__.name);
-		if(selected_cars.includes(d.srcElement.__data__.name))
-		{
-			var index = selected_cars.indexOf(d.target.__data__.CarID);
-			selected_cars.splice(index,1);
-			//console.log(selected_cars);
+		var nodeSelected = d3.select(d.target);
+		var nodeName = d.srcElement.__data__.name;
+		console.log(typeof(nodeSelected.style("stroke")));
+		if(nodeSelected.style("stroke") === "none" ){
+			nodeSelected.style("stroke", "black").style("stroke-width", "2px");
+			console.log("HIIII");
+			if(nodeName.length < 4){
+				selected_cars.push(nodeName);
+				updateData(nodeName);
+				plotGPS();
+			}
+			else{
+				var cc_dropdown = d3.select("#dropdowncc")
+				cc_dropdown.property('value',nodeName);
+				cc_dropdown = document.querySelector("#dropdowncc");
+				cc_dropdown.dispatchEvent(new Event('change'));
+			}
 		}
 		else{
-			selected_cars.push(d.srcElement.__data__.name);
+			nodeSelected.style("stroke", null).style("stroke-width", null);
+			if(selected_cars.includes(nodeName)){
+				var index = selected_cars.indexOf(nodeName);
+				selected_cars.splice(index,1);
+				console.log(d);
+				updateData(nodeName);
+				plotGPS();
+			}
+			else{
+
+				var cc_dropdown = d3.select("#dropdowncc")
+				cc_dropdown.property('value',"1");
+				cc_dropdown = document.querySelector("#dropdowncc");
+				cc_dropdown.dispatchEvent(new Event('change'));
+			}
 		}
-		updateData(d.srcElement.__data__.name);
-		plotGPS();
-		var cc_dropdown = d3.select("#dropdowncc")
-		cc_dropdown.property('value',d.srcElement.__data__.name);
-		cc_dropdown = document.querySelector("#dropdowncc");
-		cc_dropdown.dispatchEvent(new Event('change'));
 	  } );
 });
 });
