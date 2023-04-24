@@ -285,13 +285,13 @@ function legends() {
     .attr("transform", 'translate(600,10)');
    
     legendr.append("text")
-    .attr("x", -40)
+    .attr("x", -65)
     .attr("y", 3)
     .attr("text-anchor", "middle")
     .attr('fill', "black")
     .attr("font-weight",320)
     .attr("font-family","Serif")
-    .text("Select Categrories")
+    .text("Select Categories")
     .style("font-size", '12px');
 
     
