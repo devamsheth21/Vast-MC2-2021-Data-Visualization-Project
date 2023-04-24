@@ -23,8 +23,6 @@ function drawNetworkPlot(netData) {
   var svg = d3.select('#network_svg');
   svg = svg.append('g').attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var type = ['Security', 'Information Technology', 'Facilities', 'Executive', 'Engineering']
-
   var image_ref = {
     0: "data/circle-15.svg",
     1: "data/square-15.svg",
@@ -33,19 +31,6 @@ function drawNetworkPlot(netData) {
     4: "data/hexagon.svg",
     5: "data/penta.svg"
   }
-  var color = d3.scaleOrdinal().domain(type).range(d3.schemeSet2);
-
-  // var tooltip = d3.select("#question_4_div")
-  //     .append("div")
-  //     .style("opacity", 0)
-  //     .attr("class", "NetworkTooltip")
-  //     .style("background-color", "white")
-  //     .style("color", "black")
-  //     .style("border", "solid")
-  //     .style("border-width", "2px")
-  //     .style("border-radius", "5px")
-  //     .style("padding", "5px")
-  //     .style("position", "absolute");
 
   // Initialize the links
   link = svg
@@ -119,7 +104,7 @@ function drawNetworkPlot(netData) {
       highlightBasedOnGroupId(id, true);
     });
 
-  const legendText = ['Location', 'Security', 'Information Technology', 'Facilities', 'Executive', 'Engineering']
+  const legendText = ['Location', 'Executive', 'Security', 'Facilities', 'IT', 'Engineering']
 
   svg
     .selectAll("legends")

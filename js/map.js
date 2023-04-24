@@ -229,8 +229,10 @@ function updateData(car) {
     //console.log(gdc[date.getDate()][car]);
     if (selected_cars.includes(car)) {
         plotData[car] = gdc[date.getDate()][car];
+        d3.selectAll("#car_"+car).style('opacity', 0.5);
     } else {
         delete plotData[car];
+        d3.selectAll("#car_"+car).style('opacity', 0);
     }
 
     //console.log(plotData);
