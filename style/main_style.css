@@ -288,3 +288,11 @@ tr{
 tbody{
     border-radius: 10px;
 }
+
+td{
+    text-align: center
+}
+
+th{
+    background-color: #2f8332;
+}
