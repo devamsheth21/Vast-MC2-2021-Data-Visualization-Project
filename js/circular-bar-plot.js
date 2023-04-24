@@ -3,10 +3,10 @@ var clicked = null
 // Hint: This is a good place to declare your global variables
 var data
 const margin = { top: 100, right: 0, bottom: 0, left: 0 },
-  width = 860 - margin.left - margin.right,
-  height = 860 - margin.top - margin.bottom,
-  innerRadius = 150,
-  outerRadius = Math.min(width, height) / 2 - 70;
+  width = 560 - margin.left - margin.right,
+  height = 660 - margin.top - margin.bottom,
+  innerRadius = 110,
+  outerRadius = Math.min(width, height) / 2 - 50;
 
 const cc_color = "#80b1d3";
 const loyal_color = "#fb8072";
@@ -71,36 +71,36 @@ function drawCircularBarPlot() {
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom)
   svg = svg.append("g")
-    .attr("transform", `translate(${width / 2 + margin.left}, ${height / 2 + margin.top})`);
+    .attr("transform", `translate(${width / 2 + margin.left-45}, ${height / 2 + margin.top})`);
 
-  const lable_sq_size = 20;
+  const lable_sq_size = 18;
 
   svg.append("rect")
-    .attr("x", -width/2 + 30)
+    .attr("x", -width/2 + 60)
     .attr("y", -(height/2) -50)
     .attr("width", lable_sq_size)
     .attr("height", lable_sq_size)
     .attr("fill", cc_color)
 
  svg.append("rect")
-    .attr("x", -width/2 + 30)
+    .attr("x", -width/2 + 60)
     .attr("y", -(height/2) -20)
     .attr("width", lable_sq_size)
     .attr("height", lable_sq_size)
     .attr("fill", loyal_color)
 
  svg.append("text")
-    .text("Frequency of Credit Card Transactions")
-    .attr("x", -width/2 + 60)
-    .attr("y", -(height/2) -35)
-    .style("font-size", "15px")
+    .text("Count of Credit Card Transactions")
+    .attr("x", -width/2 + 85)
+    .attr("y", -(height/2) -37)
+    .style("font-size", "13px")
     .attr("alignment-baseline", "middle");
 
  svg.append("text")
-    .text("Frequency of Loyalty Card Transactions")
-    .attr("x", -width/2 + 60)
-    .attr("y", -(height/2) -5)
-    .attr("font-width")
+    .text("Count of Loyalty Card Transactions")
+    .attr("x", -width/2 + 85)
+    .attr("y", -(height/2) -7)
+    .style("font-size", "13px")
 
   // X scale: common for 2 data series
   const x = d3.scaleBand()
@@ -177,7 +177,7 @@ function drawCircularBarPlot() {
     .append("text")
     .text(d => d.location)
     .attr("transform", function (d) { return (x(d.location) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "rotate(180)" : "rotate(0)"; })
-    .style("font-size", "14px")
+    .style("font-size", "13px")
     .attr("alignment-baseline", "middle")
 
   // Add the second series

@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
   })]).then(function (values) {
     ringdata = values[0];
 
-    ringwidth = 900;
-    ringheight = 900;
+    ringwidth = 770;
+    ringheight = 770;
     ringsvg = d3.select("#ring_svg")
     // .append("svg")
     // .attr("width", ringwidth)
@@ -127,11 +127,13 @@ function Updatering(d, i) {
   if (i == 'dALL') {
     ringsvg.selectAll(".transactions")
       .style('stroke', 'white')
+      .style('stroke-width', 0.5)
       .style("visibility", "visible");
   }
   else {
     d3.selectAll('[id*="' + i + '"]')
       .style('stroke', 'white')
+      .style('stroke-width', 0.5)
       .style("visibility", "visible");
   }
 }
@@ -154,9 +156,7 @@ function DrawChart() {
 
   days = ringsvg.selectAll(".days")
     .data(Array.from(uniquedates))
-    // .enter()
     .join("circle")
-    // .attr("id",d => d.location)
     .attr("cx", inwidth / 2)
     .attr("cy", inringheight / 2)
     .attr("r", d => dateToRadius(parsedate(d)))
@@ -222,21 +222,6 @@ function DrawChart() {
         "\n CCnum : " + d.last4ccnum;
     });
 
-  // const arcGen = (innerRadius, outerRadius, startAngle, endAngle) => d3.arc()
-  // .innerRadius(innerRadius)
-  // .outerRadius(outerRadius)
-  // .startAngle(startAngle)
-  // .endAngle(endAngle);
-
-
-
-  // ringsvg.selectAll('.arc')
-  // .data(d3.range(2))
-  // .join('path')
-  // .attr('class', 'arc')
-  // .attr('d', d => arcGen(minRadius, maxRadius, d*Math.PI, d*Math.PI + Math.PI))
-  // .attr('fill', 'red' );
-
 
 
 }
@@ -275,10 +260,10 @@ function legends() {
     .data(Object.keys(colorMap))
     .enter()
     .append("rect")
-    .attr("x", 0)
-    .attr("y", (d, i) => i * 20) // position each item vertically
-    .attr("width", 15)
-    .attr("height", 15)
+    .attr("x", -120)
+    .attr("y", (d, i) => (i * 20)+8) // position each item vertically
+    .attr("width", 13)
+    .attr("height", 13)
     .style("fill", d => colorMap[d])
     .on('click', (d, i) => Updatering(i, "ty" + i));
 
@@ -286,9 +271,10 @@ function legends() {
     .data(Object.keys(colorMap))
     .enter()
     .append("text")
-    .attr("x", 20)
-    .attr("y", (d, i) => i * 20 + 12) // position the text vertically
-    .text(d => d); // set the text to the key value
+    .attr("x", -100)
+    .attr("y", (d, i) => i * 20 + 20) // position the text vertically
+    .text(d => d) // set the text to the key value
+    .style('font-size', '11px');
 
 
 }
@@ -303,7 +289,7 @@ function calend() {
 
   // Create a grid of squares for each date
   var clickedcal = null
-  var gridSize = 25,
+  var gridSize = 22,
     padding = 5;
   uniquedates.add('ALL')
 
@@ -319,14 +305,15 @@ function calend() {
     .attr("y", 130)
     .attr("text-anchor", "middle")
     .attr('fill', "green")
+    .style("font-size", "14px")
     .text("Calendar");
 
   var squares = cal.selectAll(".square")
     .data(Array.from(uniquedates))
     .join("rect")
     .attr("class", "square")
-    .attr("x", function (d, i) { return i % 4 * (gridSize + padding); })
-    .attr("y", function (d, i) { return Math.floor(i / 4) * (gridSize + padding); })
+    .attr("x", function (d, i) { return i % 4 * (gridSize + padding)+10; })
+    .attr("y", function (d, i) { return Math.floor(i / 4) * (gridSize + padding)+10; })
     .attr("width", gridSize)
     .attr("height", gridSize)
     .style("fill", "lightgreen")
@@ -358,12 +345,13 @@ function calend() {
     .join("text")
     .attr("class", "label")
     .style("pointer-events", "none")
-    .attr("x", function (d, i) { return i % 4 * (gridSize + padding) + gridSize / 2; })
-    .attr("y", function (d, i) { return Math.floor(i / 4) * (gridSize + padding) + gridSize / 2; })
+    .attr("x", function (d, i) { return (i % 4 * (gridSize + padding) + gridSize / 2)+10; })
+    .attr("y", function (d, i) { return (Math.floor(i / 4) * (gridSize + padding) + gridSize / 2)+10; })
     .text(function (d) { return d.slice(-3).replace('-', ''); })
     .style("text-anchor", "middle")
     .style("dominant-baseline", "central")
-    .style("fill", "#333");
+    .style("fill", "#333")
+    .style("font-size", "12px");
 }
 
 

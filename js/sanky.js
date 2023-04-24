@@ -1,4 +1,4 @@
-links_original_opacity = 0.7;
+links_original_opacity = 0.75;
 //const {selected_cars} = require('./map.js');
 var carNodeClicked = false;
 function selectLinkByCcNum(cc_num) {
@@ -24,8 +24,8 @@ function selectLinkByCcNum(cc_num) {
 
 document.addEventListener('DOMContentLoaded', function () {
 	var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-		width = 450 - margin.left - margin.right,
-		height = 3000 - margin.top - margin.bottom;
+		width = 300 - margin.left - margin.right,
+		height = 2000 - margin.top - margin.bottom;
 
 	// format variables
 	var formatNumber = d3.format(",.0f"), // zero decimal places
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Set the sankey diagram properties
 	var sankey = d3.sankey()
-		.nodeWidth(20)
+		.nodeWidth(10)
 		.nodePadding(8)
 		.size([width, height])
 		.nodeAlign(d3.sankeyRight);
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			.attr("y", function (d) { return d.y0; })
 			.attr("height", function (d) { return d.y1 - d.y0; })
 			.attr("width", sankey.nodeWidth())
-			.attr("nodeId", function (d) {return d.name;})
+			.attr("nodeId", function (d) { return d.name; })
 			.style("fill", function (d) {
 				return "grey";
 				// return d.color = color(d.name.replace(/ .*/, ""));
@@ -132,9 +132,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Set the opacity of all links to a lower value
 			link.style("opacity", 0.1);
 			// Set the opacity of the hovered link to 1 to make it stand out
-			d3.selectAll('.link').data(graph.links).style("opacity", function(d){
-				if (d.source.name == (id) || d.target.name == (id))
-				{
+			d3.selectAll('.link').data(graph.links).style("opacity", function (d) {
+				if (d.source.name == (id) || d.target.name == (id)) {
 					return links_original_opacity;
 				}
 				return 0.1;
@@ -146,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 
 		link.style("stroke", function (d) {
-			return  color(d.source.index);
+			return color(d.source.index);
 			// return d3.rgb(d.source.color).brighter(0.3);
 		});
 
@@ -156,39 +155,39 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Set the opacity of the hovered link to 1 to make it stand out
 			d3.select(this).style("opacity", 1);
 		})
-		.on("mouseleave", function(d) {
-			// Set the opacity of all links back to the normal value (e.g., 1)
-			link.style("opacity", links_original_opacity);
+			.on("mouseleave", function (d) {
+				// Set the opacity of all links back to the normal value (e.g., 1)
+				link.style("opacity", links_original_opacity);
+			});
+		// add in the title for the nodes
+		node.append("text")
+			.attr("x", function (d) { return d.x0 - 6; })
+			.attr("y", function (d) { return (d.y1 + d.y0) / 2; })
+			.attr("dy", "0.35em")
+			.style("font-size", "0.8em")
+			.attr("text-anchor", "end")
+			.text(function (d) { return d.name; })
+			.filter(function (d) { return d.x0 < width / 2; })
+			.attr("x", function (d) { return d.x1 + 6; })
+			.attr("text-anchor", "start");
+
+
+		node.on("click", function (d) {
+			console.log(d.srcElement.__data__.name);
+			if (selected_cars.includes(d.srcElement.__data__.name)) {
+				var index = selected_cars.indexOf(d.target.__data__.CarID);
+				selected_cars.splice(index, 1);
+				//console.log(selected_cars);
+			}
+			else {
+				selected_cars.push(d.srcElement.__data__.name);
+			}
+			updateData(d.srcElement.__data__.name);
+			plotGPS();
+			var cc_dropdown = d3.select("#dropdowncc")
+			cc_dropdown.property('value', d.srcElement.__data__.name);
+			cc_dropdown = document.querySelector("#dropdowncc");
+			cc_dropdown.dispatchEvent(new Event('change'));
 		});
-	// add in the title for the nodes
-	  node.append("text")
-		  .attr("x", function(d) { return d.x0 - 6; })
-		  .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
-		  .attr("dy", "0.35em")
-		  .attr("text-anchor", "end")
-		  .text(function(d) { return d.name; })
-		.filter(function(d) { return d.x0 < width / 2; })
-		  .attr("x", function(d) { return d.x1 + 6; })
-		  .attr("text-anchor", "start");
-	
-	  	  
-	  node.on("click",function(d){
-		console.log(d.srcElement.__data__.name);
-		if(selected_cars.includes(d.srcElement.__data__.name))
-		{
-			var index = selected_cars.indexOf(d.target.__data__.CarID);
-			selected_cars.splice(index,1);
-			//console.log(selected_cars);
-		}
-		else{
-			selected_cars.push(d.srcElement.__data__.name);
-		}
-		updateData(d.srcElement.__data__.name);
-		plotGPS();
-		var cc_dropdown = d3.select("#dropdowncc")
-		cc_dropdown.property('value',d.srcElement.__data__.name);
-		cc_dropdown = document.querySelector("#dropdowncc");
-		cc_dropdown.dispatchEvent(new Event('change'));
-	  } );
-});
+	});
 });

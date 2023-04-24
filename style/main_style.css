@@ -1,9 +1,15 @@
-body{
-    background-color: #f8fafb;
+:root {
+    --bg-color: #e9eff1;
+    --white: #faf0e6;
+  }
+
+body {
+    background-color: var( --bg-color);
 }
+
 .myContainer {
-    margin: auto;
-    width: 1600px;
+    /* margin: 6%; */
+    width: 100%;
     /* background-color: #f8fafb; */
 }
 
@@ -42,14 +48,7 @@ body{
 }
 
 
-#ring_svg {
-    width: 100%;
-    height: 975px;
-    background-color: blanchedalmond;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    /* float: right; */
-}
+
 
 
 #shankey_svg {
@@ -103,9 +102,105 @@ body{
     border-radius: 3px;
 }
 
-#sanky_div {
+/* #sanky_div {
     width: 50%;
     height: 800px;
     overflow-y: scroll;
     float: left;
+} */
+
+
+#left-shanky-div {
+    width: 20%;
+    /* height: 800px; */
+    overflow-y: scroll;
+    float: left;
+    background-color: var( --bg-color);
+    border-width: 0px;
+    
 }
+
+#right-scroll-div {
+    width: 80%;
+    height: 800px;
+    /* overflow-y: scroll; */
+    float: right;
+    background-color: var( --bg-color);
+}
+
+#left-circular-div {
+    width: 45%;
+    height: 700px;
+    /* overflow-y: scroll; */
+    float: left;
+    background-color: var( --bg-color);
+}
+
+#circular_bar_svg {
+    width: 100%;
+    height: 700px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    float: left;
+}
+
+
+#right-ring-div {
+    padding-top: 8px;
+    width: 52%;
+    height: 700px;
+    /* overflow-y: scroll; */
+    float: right;
+    background-color: white;
+}
+
+#ring_svg {
+    width: 100%;
+    height: 655px;
+    background-color: white;
+    /* border: 1px solid lightgray; */
+    /* border-radius: 3px; */
+    /* float: right; */
+}
+
+#map_div {
+    width: 100%;
+    height: 800px;
+    /* overflow-y: scroll; */
+    background-color: black;
+
+}
+
+#network_div {
+    width: 100%;
+    height: 1000px;
+    background-color: violet;
+
+}
+
+#location_label {
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+}
+
+#ring-drop {
+    width: 220px;
+    height:20px;
+    float: left;
+    margin-right: 20px;
+}
+
+#dropdownloc{
+    height:30px;
+}
+
+#dropdowncc{
+    height:30px;
+}
+
+#panel{
+    margin: 5px;
+}
+

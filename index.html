@@ -15,50 +15,84 @@
     <script src="js/box-plot.js"></script>
     <script src="js/sanky.js"></script>
     <script src="js/network_plot.js"></script>
-    <link rel="stylesheet" href="style/main_style.css"></head>
+    <link rel="stylesheet" href="style/main_style.css">
+</head>
 
 <body>
     <div class="myContainer">
         <h1 class="text-center">Project - CSE 578 - Spring 2023</h1>
         <hr>
 
-        <div id="question_1_div" class="border border-dark rounded bg-light shadow-sm">
-            <svg id="circular_bar_svg"></svg>
-            <div class="ringcontainer" >
-            <div id="panel" class="border border-dark rounded bg-light shadow-sm">
-            <label for="global-indicator-select">Interact:</label>
-            <select  id="dropdownloc">
-                <option value=1> All</option>
-            </select>
-            <select  id="dropdowncc">
-                <option value=1> All</option>
-            </select>
-             </div>
-                <div id="ringvisualization" >
-                    <svg id="ring_svg"></svg>
-                </div>
-            </div> 
-        </div>
-        <div id="question_2_div" class="border border-dark rounded bg-light shadow-sm">
-            <div id="sanky_div">
-				<svg id="shankey_svg"></svg>
-			</div>
-            <svg id="box_plot_svg"></svg>
-        </div>
-        <div id="question_3_div" class="border border-dark rounded bg-light shadow-sm">
-            <input type="date" id="date" min="2014-01-06" max="2014-01-19" value="2014-01-06" onchange="dateOnChange(this)">
-            <svg id="map_svg"></svg>
-            <div id="map_div">
-                <svg id="map_cars"></svg>
+        <div class="row">
+
+            <!-- shanky div -->
+            <div class="" id="left-shanky-div">
+                <svg id="shankey_svg" class="border rounded-4 shadow "></svg>
             </div>
-            <button type="button" id="play">Play</button>
+
+
+            <div class="col-md-2" id="right-scroll-div">
+                <div class="col">
+                    <!-- circular  and  ring both -->
+                    <div class="row-m-3" id="circular_and_ring_both">
+                        <div class="row">
+
+                            <!-- circular-bar-plot div -->
+                            <div class="col-m-2" id="left-circular-div">
+                                <svg id="circular_bar_svg" class="border rounded-4 shadow "></svg>
+                            </div>
+
+                            <!-- ring chart -->
+                            <div class="col-md-2 border rounded-4 shadow" id="right-ring-div" >
+                                <div id="panel">
+                                    <label id="location_label">Location:</label>
+                                    <div class="dropdowns" id="ring-drop">
+                                        <select class="form-select" id="dropdownloc">
+                                            <option value=1> All</option>
+                                        </select>
+                                    </div>
+                
+                                    <label id="cc_label" style="float: left; margin-right: 0px; text-align: center;">Credit Card #: </label>
+                                    <div class="dropdowns" style="width: 150px; float: left; margin-left: 10px;">
+                                        
+                                        <select class="form-select" id="dropdowncc">
+                                            <option value=1> All</option>
+                                        </select>
+                                    </div>
+                                 </div>
+
+                                <svg id="ring_svg" ></svg> <!-- ring svg -->
+                            </div>
+                        </div>
+
+                        <!-- map chart -->
+                        <div class="row-m-3" id="map_div">
+                            <input type="date" id="date" min="2014-01-06" max="2014-01-19" value="2014-01-06"
+                                onchange="dateOnChange(this)">
+                            <svg id="map_svg"></svg>
+                            <div id="map_div">
+                                <svg id="map_cars"></svg>
+                            </div>
+                            <button type="button" id="play">Play</button>
+                        </div>
+
+                        <!-- network chart -->
+                        <div class="row-m-3" id="network_div">
+                            <svg id="network_svg"></svg>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+
 
         </div>
-        <div id="question_4_div" class="border border-dark rounded bg-light shadow-sm">
-            <svg id="network_svg"></svg>
-        </div>
-
-    </div>
 </body>
 
 </html>
