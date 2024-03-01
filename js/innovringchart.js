@@ -329,10 +329,10 @@ function legends() {
     .data(Object.keys(colorMap))
     .enter()
     .append("text")
-    .attr("x", -130)
+    .attr("x", -100)
     .attr("y", (d, i) => i * 20 + 20) // position the text vertically
     .text(d => d) // set the text to the key value
-    .style('font-size', '11px');
+    .style('font-size', '8px');
 
 
 }
