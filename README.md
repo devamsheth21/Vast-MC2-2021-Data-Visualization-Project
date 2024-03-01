@@ -10,17 +10,22 @@
 
 ### Installing and running code in local machine
 
-- First clone the git repository by running "git clone https://github.com/asu-cse578-s2023/Devam-Hitansh-Manan-Niketan-Nihar-Tirth.git" command using git bash or terminal.
+- First clone the git repository by running `git clone https://github.com/devamsheth21/Vast-MC2-2021-Data-Visualization-Project.git` command using git bash or terminal.
 
-- Go the the repository folder by running "cd Devam-Hitansh-Manan-Niketan-Nihar-Tirth" command.
+- Go the the repository folder by running :
+ `cd Vast-MC2-2021-Data-Visualization-Project`
 
-- Start simple python server by running command "python -m http.server". Note: python should be installed for running this command.
+- Start a simple Python server by running the command `python -m http.server`. Note: Python should be installed to run this command.
 
-- Open Firefox browser window and go to "localhost:8000".
-
+- Open a Firefox browser window and go to `localhost:8000`.
+### Poster
+![Poster Image](DV_poster.jpg)
 ### [Project Report](https://docs.google.com/document/d/1_R_ygCEY0ZkCn-aUuypwIZvURobctY-NOcmI_ee9_N0/edit?usp=sharing)
+### ![Report](DV_Team_Report/1.jpg) 
+![Report](DV_Team_Report/2.jpg) 
+![Report](DV_Team_Report/3.jpg) 
+![Report](DV_Team_Report/4.jpg) 
+![Report](DV_Team_Report/5.jpg) 
 
-### [Video](https://drive.google.com/file/d/1ShsXpQhaQAEpjstM8Eht4vvEjHzT0WDv/view?usp=sharing)
- 
-### [Poster PDF](DV_poster.pdf)
 
+### [Video Presentation](https://drive.google.com/file/d/1ShsXpQhaQAEpjstM8Eht4vvEjHzT0WDv/view?usp=sharing)
