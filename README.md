@@ -20,5 +20,7 @@
 
 ### [Project Report](https://docs.google.com/document/d/1_R_ygCEY0ZkCn-aUuypwIZvURobctY-NOcmI_ee9_N0/edit?usp=sharing)
 
-### [Video]()
+### [Video](https://drive.google.com/file/d/1ShsXpQhaQAEpjstM8Eht4vvEjHzT0WDv/view?usp=sharing)
+ 
+### [Poster PDF](Devam-Hitansh-Manan-Niketan-Nihar-Tirth/DV_poster.pdf)
 
