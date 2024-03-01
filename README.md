@@ -1,5 +1,5 @@
 # Project: VAST Challenge 2021 MC-2
-### Hosted Website 
+### Hosted Website : https://devamsheth21.github.io/Vast-MC2-2021-Data-Visualization-Project/
 ### Team Members:
 - Person 1: Tirth Hihoriya - thihoriy@asu.edu
 - Person 2: Nihar Thakkar - njthakkar@asu.edu
