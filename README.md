@@ -22,5 +22,5 @@
 
 ### [Video](https://drive.google.com/file/d/1ShsXpQhaQAEpjstM8Eht4vvEjHzT0WDv/view?usp=sharing)
  
-### [Poster PDF](Devam-Hitansh-Manan-Niketan-Nihar-Tirth/DV_poster.pdf)
+### [Poster PDF](DV_poster.pdf)
 
